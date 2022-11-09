@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+/**
+ * @author MyPC
+ *
+ */
+module example {
+}
