@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form name="write" action="#" method="post">
+        <table>
+            <tr>
+                <td>
+                    <h1>게시판 글쓰기</h1>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3>제목</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="title" size="50" minlength="4" maxlength="100" placeholder="제목 입력(4-100)" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3>내용</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <textarea name="description" cols="52" rows="6" placeholder="내용 작성" width="50" required></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3>작성자</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="writer" size="50" minlength="2" maxlength="10" placeholder="작성자(2자-10자)" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br><input type="submit" size="50" value="등록">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

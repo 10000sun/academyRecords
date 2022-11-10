@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form name="register" method="post" action="#">
+        <table border="1">
+                <caption><img src="../images/ex5-1.jpg"></caption>
+            <tr>
+                <td>*아이디</td>
+                <td><input type="text" name="uid" required></td>
+            </tr>
+            <tr>
+                <td>*비밀번호</td>
+                <td><input type="password" name="upwd" required></td>
+            </tr>
+            <tr>
+                <td rowspan="2">*이메일</td>
+                <td>
+                    <input type="email" name="umail" required>@ 
+                    <select>
+                        <option value="naver">naver.com</option>
+                        <option value="daum">daum.net</option>
+                        <option value="google">google.com</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>뉴스를 받으시겠습니까? 
+                    <input type="radio" name="mailing" id="mailing_y" checked> 수신동의
+                    <input type="radio" name="mailing" id="mailing_n"> 동의안함
+                </td>
+            </tr>
+            <tr>
+                <td>*관심정보</td>
+                <td>
+                    <input type="checkbox" name="interest">피부관리
+                    <input type="checkbox" name="interest">천연화장품
+                    <input type="checkbox" name="interest">피부나이측정
+                </td>
+            </tr>
+            <tr>
+                <td>*메모</td>
+                <td><textarea cols="70" rows="3"></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <img src="../images/ex5-2.jpg">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 정규식</title>
+    <script src="check3.js"></script>
+</head>
+<body onload="document.getElementById('name').focus()">
+    <h3>자바스크립트 정규식</h3>
+    <form name="member" method="post" action="#" id="member">
+        이름 : <input type="text" name="name" id="name"> <br>
+        아이디 : <input type="text" name="id" id="id"> <br>
+        비밀번호 : <input type="password" name="passwd" id="passwd"> <br>
+        연락처 : <input type="text" name="tel" id="tel"> <br>
+        전자우편 : <input type="text" name="email" id="email"> <br>
+        <input type="button" value="회원가입" onclick="check()">
+        <input type="button" value="취소" onclick="document.getElementById('member').reset()">
+    </form>
+</body>
+</html>

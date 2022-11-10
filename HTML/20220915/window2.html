@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 객체</title>
+    <script>
+        function popup(){
+            var newwin = window.open("notice.html","notice","width=200,height=200,top=100,left=100")
+
+            // 팝업창이 차단되었다면
+            if (newwin == null){
+                alert("팝업이 차단되었으니 해제해주세요.");
+            }
+        }
+
+    </script>
+</head>
+<body onload="popup();">
+    
+</body>
+</html>

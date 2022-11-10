@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="1.css">
+    <script src="1.js"></script>
+</head>
+<body onload="document.getElementById('uid').focus();">
+    <form name="registform" method="post" action="#" id="registform">
+        <table>
+            <tr>
+                <td colspan="2"><h2>로그인 정보</h2></td>
+            </tr>
+            <tr>
+                <th>아이디</th>
+                <td>
+                    <input class="text1" type="text" id="uid" placeholder="아이디 영문 또는 숫자 6~16자리로 입력해 주세요.">
+                </td>
+            </tr>
+            <tr>
+                <th>비밀번호</th>
+                <td>
+                    <input class="text1" type="password" id="upwd1" placeholder="비밀번호를 입력해 주세요. (8~16자/문자, 숫자, 특수문자 혼용)">
+                </td>
+            </tr>
+            <tr>
+                <th>비밀번호 확인</th>
+                <td>
+                    <input class="text1" type="password" id="upwd2" placeholder="비밀번호를 확인해주세요.">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><h2>회원 정보</h2></td>
+            </tr>
+            <tr>
+                <th>이름</th>
+                <td>
+                    <input class="text1" type="text" id="uname" placeholder="실명을 입력해 주세요.">
+                </td>
+            </tr>
+            <tr>
+                <th>이메일</th>
+                <td>
+                    <input type="text" id="umail" placeholder="이메일"> @ 
+                    <select id="mailcheck">
+                        <option value="daum">daum.net</option>
+                        <option value="naver">naver.com</option>
+                        <option value="google">google.com</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>휴대전화번호</th>
+                <td>
+                    <select id="telcheck">
+                        <option value="010">010</option>
+                        <option value="011">011</option>
+                    </select>
+                    - <input type="tel" id="utel" placeholder="휴대전화번호를 -없이 입력해 주세요.">
+                </td>
+            </tr>
+            <tr>
+                <th>본인확인</th>
+                <td>
+                    <input type="button" id="ucheck" value="본인확인하기">
+                </td>
+            </tr>
+        </table>
+        <input type="button" id="register" value="가입하기" onclick="check()">
+        <input type="button" id="cancle" value="가입취소" onclick="document.getElementById('registform').reset()">
+    </form>
+</body>
+</html>

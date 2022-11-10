@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 문서객체모델2</title>
+    <script src="dom2.js"></script>
+</head>
+<body onload="document.dom.id.focus()">
+    <h3>문서객체모델</h3>
+    <form name="dom" method="post" action="#">
+        <fieldset>
+            <legend>회원가입</legend>
+            아이디 : <input type="text" name="id" > <br>
+            비밀번호 : <input type="password" name="passwd"> <br>
+            연락처 : <input type="text" name="tel"> <br>
+            주소 : <input type="text" name="addr"> <br>
+            <input type="button" value="회원가입" onclick="check()" name="register">
+            <input type="reset" value="취소">
+        </fieldset>
+    </form>
+</body>
+</html>

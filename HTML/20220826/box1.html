@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>박스모델</title>
+    <style>
+        .box1{
+            border-style: dashed;
+            border-width: 0, 0, 1px, 0;
+            border-color: blue;
+        }
+        .box2{
+            border: dashed 1px black;
+            background-color: black;
+            color: white;
+            width: 200px;
+            height: 40px;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h3>로그인</h3>
+    <form name="form" method="post" action="#">
+        아이디 : <input type="text" name="id" class="box1"><br>
+        비밀번호 : <input type="password" name="passwd" class="box1"><br>
+        <input type="submit" value="로그인" class="box2">
+    </form>
+</body>
+</html>

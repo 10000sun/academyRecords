@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>input태그 주요속성</title>
+</head>
+<body>
+    <h3>회원가입</h3>
+    <form name="form" method="post" action="#">
+        아이디 : <input type="text" name="uid" required autofocus><br>
+        비밀번호 : <input type="password" name="upwd" required><br>
+        연락처 : <select name="tel1">
+                    <option value="" >선택하세요</option>
+                    <option value="010" selected>010</option>
+                    <option value="011">011</option>
+                    <option value="016">016</option>
+                    <option value="017">017</option>
+                    <option value="018">018</option>
+                    <option value="019">019</option>
+                </select>
+                - <input type="tel" name="tel2" maxlength="4">
+                - <input type="tel" name="tel3" maxlength="4"><br>
+        자기소개 : <textarea name="profile" rows="4" cols="40"></textarea><br>
+        <input type="submit" value="회원가입">
+        <input type="reset" value="취소">
+    </form>
+</body>
+</html>

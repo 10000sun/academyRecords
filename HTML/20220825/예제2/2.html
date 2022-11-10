@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form name="naver" method="post" action="#">
+        <caption><img src="../images/naver_logo.gif"></caption>
+        <table>
+            <tr>
+                <td colspan="2">아이디</td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="text" name="uid" required size="30"></td>
+            </tr>
+            <tr>
+                <td colspan="2">비밀번호</td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="password" name="upwd1" required size="30"></td>
+            </tr>
+            <tr>
+                <td colspan="2">비밀번호 재확인</td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="password" name="upwd2" required size="30"></td>
+            </tr>
+            <tr>
+                <td colspan="2">이름</td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="text" name="uname" required size="30"></td>
+            </tr>
+            <tr>
+                <td colspan="2">생년월일</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="tel" name="ubirth" max="4" placeholder="년(4자)" size="9" required>
+                    <select name="month" id="umonth" required>
+                        <option value="month">월</option>
+                        <option value="jam">1월</option>
+                        <option value="feb">2월</option>
+                        <option value="mar">3월</option>
+                        <option value="apl">4월</option>
+                        <option value="may">5월</option>
+                        <option value="jun">6월</option>
+                        <option value="jul">7월</option>
+                        <option value="aug">8월</option>
+                        <option value="sep">9월</option>
+                        <option value="oct">10월</option>
+                        <option value="nov">11월</option>
+                        <option value="dec">12월</option>
+                    </select>
+                    <input type="tel" name="uday" max="2" placeholder="일" size="8" required>
+                </td colspan="2">
+            </tr>
+            <tr>
+                <td colspan="2">성별</td>
+            </tr>
+            <tr>
+                <td colspan="2">                    
+                    <select name="gender" id="gender" required>
+                    <option value="gender2">성별</option>
+                    <option value="male">남자</option>
+                    <option value="female">여자</option>
+                </select>
+            </td>
+            </tr>
+            <tr>
+                <td colspan="2">본인 확인 이메일<small>(선택)</small></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input size="30" type="email" name="umail" required></td>
+            </tr>
+            <tr>
+                <td colspan="2">휴대전화</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <select name="phone" id="phone" required>
+                    <option value="korea" selected>대한민국 +82</option>              
+                 </select>
+            </td>
+            </tr>
+            <tr>
+                <td><input type="tel" name="tel" placeholder="전화번호 입력" required size="15"> <input type="button" name="auth" value="인증번호 받기"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="tel" name="authwrite" placeholder="인증번호 입력하세요" required size="30"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input size="30" type="submit" name="submit" value="가입하기"></td>
+            </tr>
+
+        </table>
+    </form>
+</body>
+</html>

@@ -1,0 +1,82 @@
+body{
+    margin: 10px;
+}
+table{
+    margin: 10px;
+}
+td{
+    padding: 10px;
+    margin: 10px;
+}
+th{
+    text-align: left;
+    font-size: 14px;
+}
+.text1{
+    border: none;
+    border-bottom: 1px solid lightgray;
+    padding: 15px;
+    width: 310px;
+}
+.text1::placeholder{
+    font-size: 11px;
+}
+#umail{
+    padding: 15px;
+    width: 70px;
+    border: none;
+    border-bottom: 1px solid lightgray;
+}
+#mailcheck{
+    padding: 15px;
+    width: 200px;
+    border: none;
+    border-bottom: 1px solid lightgray;
+}
+#telcheck{
+    padding: 15px;
+    width: 120px;
+    border: none;
+    border-bottom: 1px solid lightgray;
+}
+#utel{
+    padding: 15px;
+    width: 160px;
+    border: none;
+    border-bottom: 1px solid lightgray;
+}
+#utel::placeholder{
+    font-size: 10px;
+}
+#ucheck{
+    width: 340px;
+    height: 70px;
+    background-color: rgb(119, 122, 255);
+    border: none;
+    color: white;
+    font-size: 12px;
+    border-radius: 2px;
+}
+#register{
+    width: 100px;
+    height: 30px;
+    background-color: lightskyblue;
+    border: none;
+    color: white;
+    margin-left: 150px;
+}
+#register:hover{
+    cursor: pointer;
+}
+#cancle{
+    width: 100px;
+    height: 30px;
+    background-color: lightskyblue;
+    border: none;
+    color: white;
+    border-radius: 2px;
+}
+#cancle:hover{
+    cursor: pointer;
+}
+

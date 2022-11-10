@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .td1{
+            text-align: right;
+            margin: 10px;
+            font-size: 9pt;
+        }
+        td{
+            padding: 10px;
+        }
+        .text1{
+            width: 170px;
+            height: 25px;
+            border: 1px solid lightgray;
+            border-radius: 2px;
+        }
+        h2{
+            margin: 0;
+        }
+        hr{
+            margin-top: 0;
+            border: 1px solid lightgray;
+        }
+        .pwdfinder{
+            width: 150px;
+            height: 30px;
+            border: 1px solid lightgray;
+        }
+        .del1{
+            background-color: white;
+            color: black;
+            border: 1px solid lightgray;
+            padding: 5px;
+            border-radius: 3px;;
+        }
+    </style>
+</head>
+<body>
+    <h2>회원가입</h2>
+    <hr>
+    <form>
+        <table>
+            <tr>
+                <td class="td1">*이메일 주소</td>
+                <td colspan="2"><input class="text1" type="email" name="umail" required></td>
+            </tr>
+            <tr>
+                <td class="td1">*비밀번호</td>
+                <td><input class="text1" type="password" name="upwd1" minlength="6" required></td>
+                <td class="info1"><small>비밀번호는 6자리 이상이어야 하며 영문과 숫자를 반드시 포함해야 합니다.</small></td>
+            </tr>
+            <tr>
+                <td class="td1">*비밀번호 확인</td>
+                <td colspan="2"><input class="text1" type="password" name="upwd2" minlength="6" required></td>
+            </tr>
+            <tr>
+                <td class="td1">*아이디</td>
+                <td colspan="2"><input class="text1" type="text" name="uid" required></td>
+            </tr>
+            <tr>
+                <td class="td1">*이름</td>
+                <td colspan="2"><input class="text1" type="text" name="uname" required></td>
+            </tr>
+            <tr>
+                <td class="td1">*닉네임</td>
+                <td colspan="2"><input class="text1" type="text" name="unick" required></td>
+            </tr>
+            <tr>
+                <td class="td1">*비밀번호 찾기 질문/답변</td>
+                <td colspan="2">
+                    <select class="pwdfinder" name="pwdfind">
+                        <option value="1">다른 이메일 주소는?</option>
+                        <option value="2">내가 다닌 초등학교의 이름은?</option>
+                        <option value="3">내 고향은?</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><input class="text1" type="text" name="blank" readonly></td>
+            </tr>
+            <tr>
+                <td class="td1">홈페이지</td>
+                <td colspan="2"><input class="text1" type="url" name="uhome"></td>
+            </tr>
+            <tr>
+                <td class="td1">블로그</td>
+                <td colspan="2"><input class="text1" type="url" name="ublog"></td>
+            </tr>
+            <tr>
+                <td class="td1">생일</td>
+                <td><input type="date" name="ubirth" value="YYYY-MM-DD"></td>
+                <td><input class="del1" type="button" name="cancle" value="삭제"></td>
+            </tr>
+            <tr>
+                <td class="td1">메일링 가입</td>
+                <td>
+                    <input type="radio" name="mailing" id="mailing_y">예
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <input type="radio" name="mailing" id="mailing_n" checked>아니오
+                </td>
+            </tr>
+            <tr>
+                <td class="td1">쪽지 허용</td>
+                <td>
+                    <input type="radio" name="letter" id="letter_y" checked>모두 허용
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <input type="radio" name="letter" id="letter_fy">등록된 친구들만 허용
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <input type="radio" name="letter" id="letter_n">모두 금지
+                </td>
+            </tr>
+        </table>
+        <hr>
+        <img src="../../images/ex6-2.jpg">
+        <img src="../../images/ex6-1.jpg">
+    </form>
+</body>
+</html>

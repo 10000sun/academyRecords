@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var kor = parseInt(prompt("국어점수를 입력하세요"));
+        var eng = parseInt(prompt("영어점수를 입력하세요"));
+        var mat = parseInt(prompt("수학점수를 입력하세요"));
+        var menu = parseInt(prompt("메뉴를 선택하세요 1-총점, 2-평균, 3-종료"));
+        var plus = kor+eng+mat
+        var avr = plus/3
+        switch(menu){
+            case 1: 
+            document.write("국어, 영어, 수학 점수의 총점은 "+plus+" 점 입니다.");
+            break;
+            case 2:
+            document.write("국어, 영어, 수학 점수의 평균은 "+avr+" 점 입니다.");
+            break;
+            case 3:
+            break;
+            default:
+            document.write("올바른 메뉴를 선택해주세요.")
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

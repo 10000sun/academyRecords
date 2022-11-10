@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form name="writer" method="post" action="#">
+        <table>
+            <tr>
+                <td>구분</td>
+                <td>
+                    <select name="choose" required>
+                        <option value="choos">선택</option>
+                        <option value="int">자기소개</option>
+                        <option value="talk">자유게시판</option>
+                        <option value="ann">공지사항</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>제목</td>
+                <td><input type="text" name="title" size="50"required></td>
+            </tr>
+            <tr>
+                <td>내용</td>
+                <td><textarea name="contents" cols="100" rows="10" required></textarea></td>
+            </tr>
+            <tr>
+                <td>첨부파일</td>
+                <td><input type="file" name="file"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="등록"><input type="reset" value="취소"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

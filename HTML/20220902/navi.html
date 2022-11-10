@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .navi ul li{
+            float: left;
+            width: 150px;
+            padding: 10px;
+            list-style: none;
+            border-bottom: 1px solid lightgray;
+        }
+        .navi a:link, .navi a:visited{
+            display: block;
+            font-size: 14px;
+            color: #000;
+            padding: 10px;
+            text-decoration: none;
+            text-align: center;
+        }
+        .navi a:hover, .navi a:focus{
+            background: #222;
+            color: #fff;
+        }
+        .navi a:active{
+            background-color: #f00;
+        }
+        .contents{
+            border: 1px solid black;
+            border-radius: 5px;
+            margin: 50px;
+            padding: 30px;
+        }
+        #intro:target{
+            background-color: #0069e0;
+            color: #fff;
+        }
+        #room:target{
+            background-color: #0069e0;
+            color: #fff;
+        }
+        #reservation:target{
+            background-color: #0069e0;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navi">
+        <ul>
+            <li><a href="#intro">이용 안내</a> </li>
+            <li><a href="#room">객실 소개</a> </li>
+            <li><a href="#reservation">예약 방법 및 요금</a> </li>
+            <li><a href="ps-2.html">예약하기</a> </li>
+        </ul>
+    </nav>
+    <br>
+    <div id="intro" class="contents">
+        <h2>이용 안내</h2>
+        <p>Proin pulvinar, sapien in iaculis bibendum, erat lectus tristique nunc, ut porta metus ante eu risus. In vel neque sit amet enim vestibulum ultrices non et urna. Vivamus rhoncus ipsum ipsum, at suscipit augue mollis ac. Integer faucibus placerat tortor, vel cursus nunc mollis a. In et ligula ipsum. Nam vitae diam quis orci feugiat pharetra in iaculis purus. Ut vel varius augue.</p>
+    </div>
+    <div id="room" class="contents">
+        <h2>객실 소개</h2>
+        <p>Donec a elit luctus, aliquet risus at, tincidunt risus. Aenean ac erat in tellus pretium pharetra. Vivamus aliquet, risus eget accumsan bibendum, nulla purus ultrices sapien, eu tempus sem quam sit amet quam. Nunc scelerisque luctus augue, at aliquet sem commodo nec. Morbi tortor metus, luctus nec nunc in, mattis molestie neque. Fusce varius quis felis et blandit. Suspendisse pellentesque purus pretium libero porta, fermentum pharetra libero aliquet.</p>
+    </div>
+    <div id="reservation" class="contents">
+        <h2>예약 방법 및 요금</h2>
+        <p> placerat nulla a facilisis posuere. Pellentesque eget eleifend enim, vestibulum vulputate mauris. Aenean turpis ligula, commodo non egestas id, commodo nec tellus. Sed cursus nulla sed purus luctus, vitae lacinia lacus feugiat. Donec id nibh ut nibh iaculis vestibulum. Fusce tempor blandit enim, dignissim luctus leo lacinia ac. Nam ullamcorper libero turpis, eu dignissim metus mollis non. Nulla sit amet nulla sed sapien placerat pulvinar et a ligula. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+    </div>
+</body>
+</html>

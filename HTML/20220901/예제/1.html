@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td{
+            font-size: 10pt;
+        }
+        div{
+            padding: 30px;
+        }
+        .uid{
+            height: 25px;
+        }
+        .upwd{
+            height: 25px;
+        }
+        .text1{
+            padding-right: 20px;
+        }
+        .loginbtn{
+            width: 150px;
+            height: 70px;
+            color: white;
+            background-color: rgb(85, 85, 85);
+            border: none;
+            margin-left: 5px;
+        }
+        .reg{
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <form name="login" method="post" action="#">
+        <div class="login">
+        <table>
+            <tr>
+                <td class="text1" >이메일(아이디)</td>
+                <td colspan="2"><input class="uid" size="30" type="text" name="uid" placeholder="Emai 또는 ID를 입력하십시오" required></td>
+                <td colspan="2" rowspan="2"><input class="loginbtn" type="submit" value="로그인"></td>
+            </tr>
+            <tr>
+                <td class="text1" >비밀번호</td>
+                <td colspan="2"><input class="upwd" size="30" type="password" name="upwd" placeholder="비밀번호를 입력해 주세요" required></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><input type="checkbox" name="idsave"><b>아이디저장</b></td>
+                <td class="finder" >아이디 찾기</td>
+                <td class="finder" >비밀번호 찾기</td>
+                <td class="reg">회원가입</td>
+            </tr>
+        </table>
+    </div>
+    </form>
+</body>
+</html>

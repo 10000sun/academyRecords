@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td{
+            font-size: 11pt;
+        }
+        .text1{
+            width: 200px;
+            height: 30px;
+            border: 1px solid lightgray;
+            margin: 5px;
+            background-color: rgb(241, 241, 241);
+        }
+        .submit1{
+            width: 210px;
+            height: 50px;
+            font-size: 15px;
+            color: white;
+            background-color: rgb(82, 82, 82);
+            margin-left: 3px;
+        }
+    </style>
+</head>
+<body>
+    <form name="signup" method="post" action="#">
+        <div class="contents">
+        <table>
+            <tr>
+                <td>
+                    계정상세 (필수)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" class="text1" placeholder="아이디" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    이메일주소 (필수)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="email" class="text1" placeholder="이메일주소" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    비밀번호 (필수)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="password" class="text1" placeholder="비밀번호" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    비밀번호확인 (필수)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="password" class="text1" placeholder="비밀번호확인" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" class="submit1" value="회원등록 완료하기">
+                </td>
+            </tr>
+        </table>
+    </div>
+    </form>
+</body>
+</html>

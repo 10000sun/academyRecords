@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            margin: 70px;
+            margin-bottom: 50px;
+        }
+        th{
+            float: left;
+            font-size: 9pt;
+            text-align: center;
+            padding: 10px;
+        }
+        .uid{
+            width: 150px;
+            height: 30px;
+        }
+        .upwd{
+            width: 150px;
+            height: 30px;
+            margin-right: 15px;
+        }
+        .loginbtn{
+            width: 90px;
+            height: 80px;
+            text-align: center;
+            background-color: rgb(128, 92, 161);
+            color: white;
+            border: none;
+        }
+        .checklabel{
+            font-size: 9pt;
+            padding-left: 0;
+            margin-left: 0;
+        }
+        .checkbox1{
+            padding-right: 0;
+            margin-right: 0;
+
+        }
+        .finduid{
+            margin-left: 80px;
+            margin-top: 10px;
+            width: 120px;
+            height: 40px;
+            background-color: white;
+            border: 1px solid rgb(128, 92, 161);
+            color: rgb(128, 92, 161);
+        }
+        .findupwd{
+            width: 120px;
+            height: 40px;
+            background-color: white;
+            border: 1px solid rgb(128, 92, 161);
+            color: rgb(128, 92, 161);
+
+        }
+        .register{
+            width: 120px;
+            height: 40px;
+            background-color: white;
+            border: 1px solid rgb(128, 92, 161);
+            color: rgb(128, 92, 161);
+        }
+        hr{
+            border: 1px solid rgb(128, 92, 161);
+        }
+    </style>
+</head>
+<body>
+    <form name="signup" method="post" action="#">
+        <table>
+            <tr>
+                <th>아이디</td>
+                <td>
+                    <input type="text" class="uid" required>
+                </td>
+                <td rowspan="2">
+                    <input type="button" class="loginbtn" value="회원 로그인">
+                </td>
+            </tr>
+            <tr>
+                <th>비밀번호</th>
+                <td>
+                    <input type="password" class="upwd" required>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <input type="checkbox" id="checkbox1" class="checkbox1">
+                    <label class="checklabel" for="checkbox1">보안접속</label>
+                </td>
+            </tr>
+        </table>
+        <hr>
+        <a href="#"><input type="button" class="finduid" value="아이디 찾기" ></a>
+        <a href="#"><input type="button" class="findupwd" value="비밀번호 찾기"></a>
+        <a href="#"><input type="button" class="register" value="회원가입"></a>
+    </form>
+</body>
+</html>

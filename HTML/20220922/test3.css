@@ -1,0 +1,25 @@
+h1{
+    color: green;
+    font-weight: lighter;
+}
+.a, #a{
+    color: orange;
+    font-weight: bold;
+}
+.b{
+    font-weight: bold;
+}
+#b{
+    color: orange;
+    font-style: italic;
+}
+h2{
+    color: green;
+    font-weight: 400;
+}
+ul > li{
+    font-weight: bold;
+}
+ul ul li{
+    color: orange;
+}

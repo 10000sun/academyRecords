@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>입력양식태그</title>
+</head>
+<body>
+    <!--<h3>회원가입</h3>-->
+    <form name="frm" method="post" action="#">
+        <fieldset>
+            <legend>회원가입</legend>
+        아이디 : <input type="text" name="id" size="5"><br>
+        비밀번호 : <input type="password" name="passwd" maxlength="8" minlength="4"><br>
+        전자우편 : <input type="email" name="email"><br>
+        전화번호 : <input type="tel" name="tel"><br>
+        취미 : 등산 <input type="checkbox" name="hobby" value="등산" checked>
+               바둑 <input type="checkbox" name="hobby" value="바둑">
+               여행 <input type="checkbox" name="hobby" value="여행"> <br>
+        성별 : 남성 <input type="radio" name="gender" value="남성" checked>
+               여성 <input type="radio" name="gender" value="여성"> <br>
+        생년월일 : <input type="date" name="birth"><br>
+        첨부파일 : <input type="file" name="file"><br>
+        <input type="submit" value="회원가입">
+        <input type="reset" value="취소">
+        <input type="button" value="홈으로">
+            </fieldset>
+    </form>
+</body>
+</html>
