@@ -1,0 +1,80 @@
+※ 아래의 지시사항에 따라 실습하여 보시오.
+문제1. bbs 라는 데이터베이스를 생성하여 보시오.
+
+create database if not exists bbs;
+
+문제2. 문제1에서 생성한 데이터베이스를 지정하고 확인하여 보시오.
+
+use bbs;
+show databases;
+
+문제3. techgood이라는 일반 사용자 계정을 생성하여 보시오. 비밀번호는 tech123으로 하시오.
+
+create user 'techgood'@'localhost' identified by 'tech123';
+
+문제4. 문제3에서 생성한 사용자 계정의 비밀번호를 12345로 변경하여 보시오.
+
+alter user 'techgood'@'localhost' identified by '12345';
+
+문제5. 문제3에서 생성한 계정에 bbs 데이터베이스에 대해 생성 및 조회 권한을 부여하여 보시오.
+
+grant create, select on bbs.* to 'techgood'@'localhost';
+
+문제6. 문제3에서 생성한 사용자계정으로 로그인하여 보시오.
+
+mysql -utechgood -p
+
+문제7. bbs 데이터베이스에 board라는 테이블을 생성하시오. 단, 열의 이름은 num, name, subject, content 로 하고 각각의 자료형은 int, varchar(20), varchar(100), text로 하시오.
+
+ create table if not exists board(
+    -> num int,
+    -> name varchar(20),
+    -> subject varchar(100),
+    -> content text
+    -> );
+
+문제8. 문제7에서 생성한 테이블이 제대로 만들어 졌는지 확인하여 보시오.
+
+show tables;
+
+문제9. 문제7에서 생성한 테이블의 구조를 확인하여 보시오.
+
+desc board;
+
+문제10. 문제7에서 생성한 테이블을 삭제하여 보시오.
+
+삭제권한은 부여되지 않았다.
+
+문제11. 문제1에서 생성한 데이터베이스를 삭제하여 보시오. 삭제가 안된다면 이유는 무엇이며 해결책은?
+
+root에서 만든 bbs는 삭제할 수 없다.
+
+문제12. 문제3에서 생성한 계정에 bbs 데이터베이스에 대해 생성 및 조회 권한을 회수하여 보시오.
+
+ revoke create, select on *.* from 'techgood'@'localhost';
+
+※ 아래의 내용을 정리하여 보시오.
+문제13.  특정 조직의 업무에 공동으로 사용하기 위하여 운영상 필요한 데이터의 중복을 최소화하여 컴퓨터 기억장치내에 모아 놓은 집합체를 무엇이라고 하는지 적어보시오.
+
+데이터베이스
+
+문제14. 데이터베이스에서 ACID가 무엇인지 적어보시오.
+
+Atomicity(원자성) Consistency(일관성) Isolation(독립성) Durability(영속성)
+
+
+문제15. 정보를 저장하기 위해 테이블(Table)을 이용한 DBMS를 무엇이라고 하는지 적어보시오.
+
+관계형데이터베이스관리시스템
+
+문제16. 문제15에 해당하는 프로그램의 종류를 3가지 이상 적어보시오.
+
+mySQL, MariaDB, MS ACCESS
+
+문제17. 데이터베이스 오브젝트 (객체)에 해당하는 것을 3가지 이상 적어보시오. 
+
+테이블, 뷰, 인덱스, 트리거, 시퀀스,프로시저
+
+문제18. 빅데이터 처리를 위한 비관계형 데이터베이스 관리 시스템으로 관계형 데이터 모델을 사용하지 않는 데이터베이스를 무엇이라고 하는지 적어보시오.
+
+NoSql
