@@ -1,0 +1,66 @@
+create database rentcar;
+show databases;
+use rentcar;
+
+create table if not exists customers(
+	c_no varchar(10) not null,
+	c_name varchar(10) not null,
+	c_addr varchar(20),
+	c_phone char(13) not null,
+	primary key(c_no)
+);
+
+
+create table if not exists cars(
+	car_no varchar(10) not null,
+	car_type varchar(10) not null,
+	rent_fee int not null,
+	d_date date,
+	primary key(car_no)
+);
+
+
+create table if not exists branchs(
+	b_code varchar(10) not null,
+	b_name varchar(10) not null,
+	b_addr varchar(20),
+	b_tel char(13) not null,
+	primary key(b_code)
+);
+
+
+create table if not exists employees(
+	e_no varchar(10) not null,
+	e_name varchar(10) not null,
+	e_addr varchar(20),
+	e_phone char(13) not null,
+	primary key(e_no)
+);
+
+alter table cars add column b_code varchar(10) not null;
+
+alter table cars add constraint fk_branchs_cars 
+foreign key(b_code) references branchs(b_code);
+
+alter table employees add column b_code varchar(10) not null;
+
+alter table employees add constraint fk_employees_cars 
+foreign key(b_code) references branchs(b_code);
+
+create table if not exists customers_has_cars(
+	c_no varchar(10) not null,
+	car_no varchar(10) not null,
+	constraint fk_customers_customers_has_cars
+	foreign key(c_no) references customers(c_no),
+	constraint fk_cars_customers_has_cars
+	foreign key(car_no) references cars(car_no)
+);
+
+create table if not exists customers_has_employees(
+	c_no varchar(10) not null,
+	e_no varchar(10) not null,
+	constraint fk_customers_customers_has_employees
+	foreign key(c_no) references customers(c_no),
+	constraint fk_employees_customers_has_employees
+	foreign key(e_no) references employees(e_no)
+);

@@ -1,0 +1,57 @@
+create database homeschool;
+use homeschool;
+
+create table membership(
+	mem_no varchar(5),
+	mem_name varchar(10) not null,
+	mem_age int not null,
+	mem_addr varchar(20) not null,
+	mem_phone varchar(14) not null,
+	mem_date date,
+	primary key(mem_no)
+);
+
+create table teacher(
+	t_no varchar(5),
+	t_name varchar(10) not null,
+	t_subject varchar(5) not null,
+	t_career int not null,
+	b_no varchar(5) not null,
+	primary key(t_no),
+	foreign key(b_no) references branch(t_no)
+);
+
+create table branch(
+	b_no varchar(5),
+	b_name varchar(10) not null,
+	b_addr varchar(20) not null,
+	b_tel varchar(13) not null,
+	primary key(b_no)
+);
+
+create table homeschooling(
+	h_no varchar(5),
+	h_fee int not null,
+	h_subject varchar(20) not null,
+	mem_no varchar(5) not null,
+	primary key(h_no),
+	foreign key(mem_no) references membership(h_no)
+);
+
+create table membership_has_teacher(
+	mem_no varchar(5) not null,
+	t_no varchar(5) not null,
+	constraint fk_membership_membership_has_teacher
+	foreign key(mem_no) references membership(mem_no),
+	constraint fk_teacher_membership_has_teacher
+	foreign key(t_no) references teacher(t_no)
+);
+
+create table branch_has_homeschooling(
+	b_no varchar(5) not null,
+	h_no varchar(5) not null,
+	constraint fk_branch_branch_has_homeschooling
+	foreign key(b_no) references branch(b_no),
+	constraint fk_homeschooling_branch_has_homeschooling
+	foreign key(h_no) references homeschooling(h_no)
+);

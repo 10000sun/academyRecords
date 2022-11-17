@@ -1,0 +1,47 @@
+create database sales;
+use sales;
+
+create table if not exists customer(
+	c_no varchar(10),
+	c_name varchar(10) not null,
+	c_addr varchar(20),
+	c_phone char(13) not null,
+	primary key(c_no)
+);
+
+create table if not exists employee(
+	e_no varchar(10),
+	e_name varchar(10) not null,
+	e_hiredate date,
+	primary key(e_no)
+);
+
+create table if not exists purchase(
+	pur_no varchar(10),
+	pur_stuff varchar(10) not null,
+	pur_price int not null,
+	pur_fee int not null,
+	e_no varchar(10) not null,
+	c_no varchar(10) not null,
+	primary key(pur_no),
+	foreign key(e_no) references employee(e_no),
+	foreign key(c_no) references customer(c_no)
+);
+
+create table if not exists stuff(
+	stu_no varchar(10),
+	stu_name varchar(10) not null,
+	stu_price int not null,
+	e_no varchar(10) not null,
+	primary key(stu_no),
+	foreign key(e_no) references employee(e_no)
+);
+
+create table if not exists customer_has_stuff(
+	c_no varchar(10) not null,
+	stu_no varchar(10) not null,
+	constraint fk_customer_customer_has_stuff
+	foreign key(c_no) references customer(c_no),
+	constraint fk_stuff_customer_has_stuff
+	foreign key(stu_no) references stuff(stu_no)
+);
