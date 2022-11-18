@@ -1,0 +1,107 @@
+--DML insert문 오전 10:46 2022-11-18
+
+create database if not exists test;
+use test;
+
+create table if not exists student(
+	num int auto_increment,
+	name varchar(20) not null,
+	email varchar(30),
+	tel varchar(15) not null,
+	addr varchar(50),
+	regdate timestamp default now(),
+	primary key(num)
+);
+
+insert into student(num, name, email, tel, addr, regdate)
+values(1, '홍길동', 'test@naver.com', '010-1234-5678', '부산광역시 북구', '2022-11-18');
+
+insert into student(name, tel)
+values('이순신', '010-6321-5678');
+
+insert into student(name, email, tel ,addr)
+values('강감찬', null, '010-1111-2222', null);
+
+insert into student
+values(4, '임꺽정', 'null', '010-2222-2222', '부산광역시 부산진구', '2022-11-18');
+
+select * from student;
+
+--DML update문
+
+update student
+set addr='서울특별시 종로구'
+where num=2;
+
+update student
+set email='test@daum.net', tel='010-5678-9999'
+where num=3;
+
+update student 
+set email=null
+where num=4;
+
+--DML delete문
+
+delete from student
+where num=3;
+
+select * from student;
+
+--DML select문
+
+select num, name, regdate 
+from student;
+
+--별칭
+select num as 번호, name as 이름, regdate as 가입날짜
+from student;
+
+--중복행 제거
+select distinct(name)
+from student;
+
+
+--정렬
+select * 
+from student
+order by num desc;
+
+select * 
+from student
+order by name desc, num desc;
+
+--조건절
+
+select * from student
+where num between 2 and 4;
+
+select * from student
+where num>=2 and num<=4;
+
+select * from student
+where name<>'이순신';
+
+select * from student
+where num not in (1,2,4);
+
+select * from student
+where name like '이%';
+
+select * from student
+where addr like '부산%';
+
+select * from student
+where addr like '%종로%';
+
+select * from student
+where email is not null;
+
+
+
+
+
+
+
+
+

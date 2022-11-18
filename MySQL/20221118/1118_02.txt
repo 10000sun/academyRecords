@@ -1,0 +1,61 @@
+--이름이 홍길동인 사람의 모든컬럼을 조회하시오
+select * from student
+where name = '홍길동';
+
+--주소가 null인 사람을 name, email, tel 컬럼을 조회하시오.
+select name, email, tel
+from student
+where addr is null;
+
+--일련번호가 1부터 4까지인 모든 컬럼을 조회하시오.
+select * from student
+where num between 1 and 4;
+
+--주소가 부산인 모든 컬럼을 조회하시오. 단, 일련번호를 내림차순으로 정렬하시오.
+select * from student
+where addr like '부산%' 
+order by num desc;
+
+--주소가 입력된 사람의 name 컬럼만 조회하시오.
+select name from student
+where addr is not null;
+
+--이름이 강씨인 사람의 name, tel 컬럼을 조회하시오. 단, 별칭을 사용하시오
+select name as '이름', tel as '전화번호' from student
+where name like '강%';
+
+--이름이 강감찬, 홍길동, 임꺽정인 사람의 모든 컬럼을 조회하시오.
+select * from student
+where name in('강감찬','홍길동','임꺽정');
+
+--임꺽정의 이메일주소를 hanbit@naver.com 으로 수정하고 조회하시오.
+update student
+set email = 'hanbit@naver.com'
+where name = '임꺽정';
+
+select * from student;
+
+--강감찬의 주소를 대전광역시 유성구로 수정하고 조회하시오.
+update student
+set addr = '대전광역시 유성구'
+where name = '강감찬';
+
+select * from student;
+
+--이름이 이순신인 사람의 name 컬럼을 중복행 제거하여 조회하시오.
+select distinct(name) from student
+where name = '이순신';
+
+--서울에 거주하는 사람의 데이터를 삭제하고 조회하시오.
+delete from student
+where addr like '서울%';
+
+select * from student;
+
+
+
+
+
+
+
+

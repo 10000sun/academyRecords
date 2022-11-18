@@ -1,0 +1,135 @@
+create database if not exists product;
+
+use product;
+
+create table if not exists customers(
+	c_num varchar(16),
+	c_name varchar(50) not null,
+	c_passwd varchar(20) not null,
+	primary key(c_num)
+);
+
+create table if not exists orders(
+	o_num varchar(16),
+	c_num varchar(16),
+	o_orderdate date not null,
+	o_price int not null,
+	o_addr varchar(60),
+	o_deliverydate date,
+	o_payment int,
+	o_saleprice int not null,
+	o_point int not null,
+	primary key(o_num)
+);
+
+alter table orders add constraint fk_customers_orders
+foreign key(c_num) references customers(c_num);
+
+insert into customers(c_num, c_name, c_passwd)
+values ('C0001', '홍길동', 'abcd1234');
+insert into customers(c_num, c_name, c_passwd)
+values ('C0002', '양바른', 'ybl1234');
+insert into customers(c_num, c_name, c_passwd)
+values ('C0003', '유코식', 'uu1234');
+insert into customers(c_num, c_name, c_passwd)
+values ('C0004', '김구', 'pass1234');
+insert into customers(c_num, c_name, c_passwd)
+values ('C0005', '신사임당', 'pass4321');
+
+insert into orders(o_num, c_num, o_orderdate, o_price, o_addr, o_deliverydate, o_payment, o_saleprice, o_point)
+values('O1001', 'C0001', '2021-12-01', 1000, '서울', '2021-12-01', 10000, 100, 50);
+insert into orders(o_num, c_num, o_orderdate, o_price, o_addr, o_deliverydate, o_payment, o_saleprice, o_point)
+values('O1002', 'C0001', '2021-12-03', 450, '서울', '2021-12-06', 4500, 450, 23);
+insert into orders(o_num, c_num, o_orderdate, o_price, o_addr, o_deliverydate, o_payment, o_saleprice, o_point)
+values('O1003', 'C0004', '2021-12-07', 10000, '부산', '2021-12-10', 100000, 1000, 500);
+insert into orders(o_num, c_num, o_orderdate, o_price, o_addr, o_deliverydate, o_payment, o_saleprice, o_point)
+values('O1004', 'C0003', '2021-12-07', 5500, '대구', '2021-12-10', 55000, 550, 275);
+insert into orders(o_num, c_num, o_orderdate, o_price, o_addr, o_deliverydate, o_payment, o_saleprice, o_point)
+values('O1005', 'C0002', '2021-12-17', 8500, '광주', '2021-12-20', 85000, 850, 425);
+insert into orders(o_num, c_num, o_orderdate, o_price, o_addr, o_deliverydate, o_payment, o_saleprice, o_point)
+values('O1006', 'C0002', '2021-12-18', 2300, '광주', '2021-12-21', 23000, 230, 115);
+insert into orders(o_num, c_num, o_orderdate, o_price, o_addr, o_deliverydate, o_payment, o_saleprice, o_point)
+values('O1007', 'C0004', '2021-12-21', 500, '부산', '2021-12-24', 5000, 50, 25);
+insert into orders(o_num, c_num, o_orderdate, o_price, o_addr, o_deliverydate, o_payment, o_saleprice, o_point)
+values('O1008', 'C0001', '2021-12-22', 830, '서울', '2021-12-25', 8300, 83, 42);
+insert into orders(o_num, c_num, o_orderdate, o_price, o_addr, o_deliverydate, o_payment, o_saleprice, o_point)
+values('O1009', 'C0002', '2021-12-25', 4500, '광주', '2021-12-28', 45000, 450, 225);
+insert into orders(o_num, c_num, o_orderdate, o_price, o_addr, o_deliverydate, o_payment, o_saleprice, o_point)
+values('O1010', 'C0003', '2021-12-31', 900, '대구', '2021-01-03', 9000, 90, 45);
+
+select * from customers;
+select * from orders;
+
+update orders
+set o_deliverydate = '2022-01-03'
+where o_num = 'O1010';
+
+3. 아래 주어진 내용대로 SQL 문법을 작성하고 결과를 확인하여 보시오. 
+
+1) customer 테이블에서 홍길동 고객의 고객번호를 조회하여 보시오. 
+select c_num from customers
+where c_name = '홍길동';
+
+2) customer 테이블에서 김구 고객의 비밀번호를 pass0987로 데이터를 수정하여 보시오. 
+update customers
+set c_passwd = 'pass0987'
+where c_name='김구';
+
+3) customer 테이블에서 고객번호와 고맥명을 별칭을 사용하여 조회하여 보시오. 
+select c_num as 고객번호, c_name as 고객명
+from customers;
+
+4) orders 테이블에서 가격이 1000원 이하인 제품을 주문한 고객번호를 조회하여 보시오. 
+select c_num from orders
+where o_price <= 1000;
+
+5) orders 테이블에서 포인트가 100에서 500사이인 모든 컬럼을 조회하여 보시오. 단, 고객
+번호를 내림차순 정렬하시오. 
+select * from orders
+where o_point between 100 and 500
+order by c_num desc;
+
+6) orders 테이블에서 배송완료일이 2022년인 주문번호를 조회하여 보시오. 
+select o_num from orders
+where o_deliverydate like '2022%';
+
+7) orders 테이블에서 주문번호가 O1001, O1005, O1006, O1009인 모든 컬럼을 조회하여 
+보시오. 
+select * from orders
+where o_num in('O1001', 'O1005', 'O1006', 'O1009');
+
+8) orders 테이블에서 결제금액이 50000원 이상인 모든 컬럼을 조회하여 보시오. 단, 주문번
+호를 내림차순 정렬하시오. 
+select * from orders
+where o_payment >=50000
+order by o_num desc;
+
+9) orders 테이블에서 할인금액이 1000원인 주문번호, 고객번호, 주문일 컬럼을 조회하여 조
+시오. 
+select o_num, c_num, o_orderdate from orders
+where o_saleprice = 1000;
+
+10) orders 테이블에서 배송도시가 서울이 아닌 모든 컬럼을 조회하여 보시오. 단, 결제금액
+을 오름차순 정렬하시오. 
+select * from orders
+where o_addr<>'서울'
+order by o_payment asc;
+
+11) orders 테이블에서 고객번호 컬럼을 중복된 항목을 제거하여 조회하여 보시오. 
+select distinct(c_num) from orders;
+
+12) customer 테이블에서 고객번호가 C0001인 고객 이름을 김철수로 데이터를 수정하여 보
+시오. 
+update customers
+set c_name = '김철수'
+where c_num = 'C0001';
+
+15) customer 테이블에서 김씨인 사람의 고객번호를 별칭을 사용하여 조회하여 보시오. 
+select c_num as '고객번호' from customers
+where c_name like '김%';
+
+16) orders 테이블에서 배송도시가 광주인 데이터를 삭제하여 보시오.
+delete from orders
+where o_addr = '광주';
+
+

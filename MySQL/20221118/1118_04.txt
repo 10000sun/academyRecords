@@ -1,0 +1,55 @@
+① nms 데이터베이스를 생성하고 확인 후 지정하여 보시오.
+create database if not exists nms;
+use nms;
+
+② members 테이블을 생성하고 구조를 확인하여 보시오.
+create table if not exists members(
+	no int auto_increment,
+	name varchar(20) not null,
+	tel varchar(20),
+	addr varchar(50),
+	license enum('y','n'),
+	primary key(no)
+);
+
+desc members;
+
+③ members 테이블 아래에 데이터를 삽입(입력)하시오.
+insert into members(name, tel, addr,license) values
+('김승용', '051-123-4567', '부산광역시 남구 대연동', 'y'),
+('김양호', '051-890-1234', '부산광역시 사상구 학장동', 'n'),
+('임정제', '02-1234-1234', '서울특별시 강남구 삼성동', 'n'),
+('김재호', '052-098-7654', '울산광역시 남구 야음동', 'n'),
+('전용진', '043-456-4567', '충청남도 논산군 논산읍', 'y'),
+('황인용', '051-234-1234', '부산광역시 연제구 연산동', 'n'),
+('박지호', '031-345-6789', '인천광역시 남구 주안동', 'y');
+
+④ members 테이블에 데이터가 올바르게 삽입되었는지 전체 컬럼을 검색하시오.
+select * from members;
+
+⑤ members 테이블에서 1번 데이터의 name 컬럼을 자신의 이름으로 데이터를 수정(갱신)
+하여 보시오.
+update members
+set name = '이름'
+where no=1;
+
+⑥ members 테이블에서 3번 데이터를 삭제해 보시오.
+delete from members
+where no=3;
+
+⑦ members 테이블에서 충청남도에 거주하는 사람을 삭제하시오.
+delete from members
+where addr like '충청남도%';
+
+⑨ members 테이블에서 부산에 거주하는 사람의 license 컬럼을 'y'로 모두 데이터를 수정
+(갱신)하여 보시오.
+update members
+set license = 'y'
+where addr like '부산%';
+
+⑩ members 테이블에서 번호가 1에서 5번을 검색하여 보시오. 단, 이름을 내림차순 정렬하
+여 보시오
+select * from members
+where no between 1 and 5
+order by name desc;
+

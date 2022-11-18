@@ -1,0 +1,47 @@
+- DML (데이터조작어) -
+
+* INSERT (데이터 입력/삽입)
+INSERT INTO table명 (column1, column2, ..) VALUES (value1, value2, ...);
+INSERT INTO table명 VALUES (value1, value2, ...);
+
+--> 입력값이 숫자나 NULL이면 그대로 입력, 문자열이나 날짜면 ' ' (작은 따옴표)를 붙혀서 입력
+
+* UPDATE  (데이터 수정/갱신)
+UPDATE table명 
+SET 컬럼명=수정값, ...
+WHERE 조건;
+
+--> 수정값이 숫자나 NULL이면 그대로 입력, 문자열이나 날짜면 ' ' (작은 따옴표)를 붙혀서 입력
+
+* DELETE (데이터 삭제/제거)
+DELETE FROM table명 
+WHERE 조건;
+
+* SELECT (데이터 검색/조회/출력)
+SELECT [distinct] *, column [alias], ...
+FROM table명
+WHERE 조건
+ORDER BY column asc/desc
+
+※ 조건
+1) 범위 : between A and B
+2) 비교 : >, >=, <, <=, =, <> 
+3) 논리 : and, or, not
+4) in, not in
+5) 특정 문자열 (패턴) : like '%문자열%'
+(예) '김%', '%computer%', '%님'
+6) 서브쿼리 (Sub Query = 부질의)
+7) is null, is not null
+...
+
+* 집계함수
+1) 최대값 : max( )
+2) 최소값 : min( )
+3) 합계 : sum( )
+4) 평균 : avg( )
+5) 개수 : count(*)
+
+* select문에서 집계함수 사용
+select 집계함수(컬럼명) as 별칭
+from 테이블명
+where 컬럼명 조건절;
