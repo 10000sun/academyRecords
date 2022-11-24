@@ -1,0 +1,29 @@
+※ 아래의 지시사항에 따라 실습하여 보시오.
+1) vendors 테이블과 products 테이블을 조인하여 prod_name, vend_name, prod_price 컬럼을 출력하여 보시오.
+select p.prod_name, p.prod_price, v.vend_name
+from vendors v join products p
+on v.vend_id = p.vend_id;
+
+2) prod_id가 BR01의 prod_price와 quantity 를 출력하여 보시오. (products, orderitems 테이블 참조)
+select p.prod_price, o.quantity
+from products p join orderitems o
+on p.prod_id = o.prod_id
+where p.prod_id = 'BR01';
+
+3) 주문일 (order_date)이 2월인 고객 (cust_name)을 출력하여 보시오. (orders, custemers 테이블 참조)
+select c.cust_name from customers c join orders o
+on c.cust_id = o.cust_id
+where o.order_date like '%2004-02%';
+
+4) item_price (가격)이 가장 높은 prod_name (상품명)을 출력하여 보시오. (products, orderitems 테이블 참조)
+select distinct p.prod_name
+from products p join orderitems o
+on p.prod_id = o.prod_id
+where item_price=(select max(item_price) from orderitems);
+
+5) orders 테이블에서 고객아이디 (cust_id)가 1000000001인 cust_address, cust_city, cust_state, cust_zip를 
+출력하여 보시오.  (orders, custemers 테이블 참조)
+select distinct c.cust_address, c.cust_city, c.cust_state, c.cust_zip
+from customers c join orders o
+on c.cust_id = o.cust_id
+where c.cust_id = 1000000001;

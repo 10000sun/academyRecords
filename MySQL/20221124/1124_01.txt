@@ -1,0 +1,44 @@
+select c.cust_id,c.cust_name,c.cust_address,o.order_num,o.order_date
+from customers c join orders o
+on c.cust_id = o.cust_id;
+
+select c.cust_id,c.cust_name,c.cust_address,o.order_num,o.order_date
+from customers c, orders o
+on c.cust_id = o.cust_id
+where o.order_num=20005;
+
+select c.cust_id,c.cust_name,c.cust_address,o.order_num,o.order_date
+from customers c inner join orders o
+on c.cust_id = o.cust_id;
+
+
+##########################################################
+
+select c.cust_id,c.cust_name,c.cust_address,o.order_num,o.order_date
+from customers c join orders o
+on c.cust_id = o.cust_id
+where o.order_num=20005;
+
+select c.cust_id,c.cust_name,c.cust_address,o.order_num,o.order_date
+from customers c, orders o
+where c.cust_id = o.cust_id;
+
+======================================================
+
+
+c --> cust_id, cust_name, cust_email
+o1 --> order_num, order_date
+o2 --> prod_id,item_price
+
+select c.cust_id, c.cust_name, c.cust_email, o1.order_num, o1.order_date, o2.prod_id,o2.item_price
+from customers c join orders o1
+on c.cust_id=o1.cust_id join orderitems o2
+on o1.order_num=o2.order_num;
+
+select c.cust_id, c.cust_name, c.cust_email, o1.order_num, o1.order_date, o2.prod_id,o2.item_price
+from customers c, orders o1, orderitems o2
+where c.cust_id=o1.cust_id, o2 and o1.order_num=o2.order_num;
+
+
+
+

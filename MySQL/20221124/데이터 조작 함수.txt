@@ -1,0 +1,22 @@
+select abs() 절대값
+select ceil() 올림
+select ceiling() 올림
+select floor() 버림
+select truncate() 버림
+select round() 반올림
+select pow() 제곱
+select lower() 소문자
+select upper() 대문자
+select ltrim() 왼쪽 공백 제거
+select rtrim() 오른쪽 공백 제거
+select replace() 대치
+select reverse() 역방향
+select substring() 문자열 추출
+select sysdate() 현재 날짜 시간
+select year(sysdate()) 현재 연도
+select month(sysdate()) 현재 월
+select day(sysdate()) 현재 일
+select left() 왼쪽 추출
+select right() 오른쪽 추출
+select mid() 중간 추출
+select concat() 문자열 결합

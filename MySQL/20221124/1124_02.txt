@@ -1,0 +1,19 @@
+1) products 테이블에서 prod_price가 제일 높은 prod_name, prod_price 컬럼을 출력하시오.
+단, prod_name은 영문대문자로 prod_price는 소수점 첫째자리까지 출력하시오.
+select upper(prod_name), round(prod_price,1) from products
+where prod_price=(select max(prod_price) from products);
+
+2) 1)에서 prod_price 컬럼에 $11.9형태로 출력하시오.
+select upper(prod_name), concat('$', round(prod_price, 1)) from products
+where prod_price=(select max(prod_price) from products);
+
+3) orders 테이블에서 order_date가 2004년 05월 01일 부터 2004년 05월 31일까지인 order_date 컬럼만을 출력하시오. 단, order_date는 연월일만 출력하시오.
+select year(order_date), month(order_date), day(order_date) from orders
+where order_date between '2004-05-01' and '2004-05-31';
+
+4) orders 테이블에서 order_date가 2004년 05월 01일 부터 2004년 05월 31일까지인 order_date 컬럼만을 출력하시오. 단, order_date는 월만 출력하시오.
+select month(order_date) from orders
+where order_date between '2004-05-01' and '2004-05-31';
+
+5) orderitems 테이블에서 prod_id, quantity, item_price, 수량(quantity)*단가(item_price)순으로 출력하시오. 단, 수량*단가의 컬럼명은 가격이라는 이름으로 하고 원을 붙여서 출력하시오.
+select prod_id, quantity, item_price, concat(quantity*item_price, ' 달러') as '가격' from orderitems;

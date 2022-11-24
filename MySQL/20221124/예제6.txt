@@ -1,0 +1,87 @@
+※ 아래의 지시사항에 따라 실습하여 보시오.
+1) exam 데이터베이스를 생성하고 지정하시오.
+create database if not exists exam;
+
+2) customers 테이블의 구조를 확인하여 보고 모든 컬럼을 검색하여 보시오.
+desc customers;
+
+3) products 테이블에서 prod_name, prod_price 컬럼을 검색하여 보시오. 단, prod_name을 내림차순 정렬하시오.
+select prod_name, prod_price from product order by prod_name desc;
+
+4) products 테이블에서 prod_price 컬럼이 7이상인 모든 컬럼을 검색하여 보시오.
+select * from products
+where prod_price>=7;
+
+5) products 테이블에서 prod_name이 doll이라고 들어간 prod_id와 prod_price 컬럼을 검색하여 보시오.
+select prod_id, prod_price 
+from product
+where prod_name like '%doll%';
+
+6) products 테이블에서 prod_id가 R로 시작하는 모든 컬럼을 검색하여 보시오. 단, prod_name을 오름차순 정렬하여 보시오.
+select * from product
+where prod_id like 'R%'
+order by prod_name asc;
+
+7) products 테이블에서 prod_price 컬럼이 5에서 8사이의 모든 컬럼을 검색하여 보시오.
+select * from product 
+where prod_price between 5 and 8;
+
+8) orderitems 테이블의 구조를 확인하여 보고 모든 컬럼을 검색하여 보시오.
+desc orderitems;
+
+9) orderitems 테이블에서 order_num(주문번호)이 20008인 prod_id,quantity,item_price 컬럼을 검색하여 보시오.
+select prod_id,quantity,item_price from orderitems
+where order_num = 20008;
+
+10) orderitems 테이블에서 prod_id, quantity,item_price, 수량(quantity)*단가(item_price) 순으로 출력하여 보시오. 단, 수량*단가의 컬럼명은 가격이라는 이름으로 검색하여 보시오.
+select prod_id, quantity,item_price, quantity*item_price as '가격' from orderitems;
+
+11) 10)을 prod_id를 내림차순 정렬하여 검색하여 보시오.
+select prod_id, quantity,item_price, quantity*item_price as '가격' from orderitems
+order by prod_id desc;
+
+12) customers 테이블에서 cust_name(고객명)이 F로 시작하는 모든 컬럼을 검색하여 보시오.
+select * from customers
+where cust_name like 'F%';
+
+13) orders 테이블에서 order_date(주문일)이 2004년 5월 1일부터 2004년 5월31일까지인 모든 컬럼을 검색하여 보시오.
+select * from orders
+where order_date between 2004-05-01 and 2004-05-31;
+
+14) products 테이블에서 prod_name(상품명) 중 toy 가 들어가는 것의 모든 컬럼을 검색하여 보시오. 단, prod_name을 내림차순 정렬하여 보시오.
+select * from products
+where prod_name like '%toy%'
+order by prod_name desc;
+
+15) products 테이블에서 prod_name이 King doll인 것의 prod_id,  prod_price, prod_name 순으로 컬럼을 검색하여 보시오.
+select prod_id, prod_price, prod_name from products
+where prod_name = 'King doll';
+
+16) vendors 테이블에서 vend_city가 London인 것의 vend_name을 검색하여 보시오.
+select vend_name from vendors
+where vend_city = 'London';
+
+17) orderitems 테이블에서 order_num(주문번호)이 20008인 prod_id,quantity,item_price 최상위 1개행만 검색하여 보시오.
+select prod_id,quantity,item_price from orderitems
+where order_num =20008
+order by item_price desc limit 1;
+
+select prod_id,quantity,item_price from orderitems
+where order_num =20008
+order by item_price desc limit 1;
+
+18) customers 테이블에서 cust_state가 'IL','IN','MI'인 cust_name, cust_contact, cust_email 컬럼을 검색하여 보시오.
+select cust_name, cust_contact, cust_email from customers
+where cust_stater in('IL','IN','MI');
+
+19) customers 테이블에서 cust_name이 'Fun4All'인 cust_name, cust_contact, cust_email 컬럼을 검색하여 보시오.
+select cust_name, cust_contact, cust_email from customers
+where cust_name = 'Fun4All';
+
+20) customers 테이블에서 cust_zip (우편번호)가 '43333'인 cust_name (고객)을 검색하여 보시오.
+select cust_name from customers
+where cust_zip = '43333';
+
+21) customers 테이블에서 cust_state (고객이 거주하는 주)가 'MI(마이애미)'를 제외하고 모든 컬럼을 검색하여 보시오.
+select * from customers
+where cust_state <> 'MI';
