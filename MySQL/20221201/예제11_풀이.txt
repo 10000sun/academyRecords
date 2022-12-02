@@ -1,0 +1,120 @@
+--1
+select c_no,c_name,c_addr
+from customer;
+
+--2
+select * from account
+where a_dropdate is not null; 
+
+--3
+select c_name,c_addr,c_phone from customer
+where c_addr like '부산%' or c_addr like '서울%';
+
+--4
+select a.a_no, a.a_name, a.a_dropdate,a_amount
+from account a join branch b
+on a.b_code = b.b_code
+where b.b_name ='광주';
+
+--5
+select b_name from branch
+where b_code not in (select b_code from account);
+
+select b.b_name as 지점명
+from branch b left outer join account a
+on b.b_code = a.b_code
+where b.b_code not in (select b_code from account);
+
+--6
+select l_no,l_name,l_date,l_term,l_amount
+from loan;
+
+--7
+select count(*) as '대출상품수'
+from branch b join loan l
+on b.b_code=l.b_code
+where b.b_name like '서울%';
+
+--8
+select count(a_name) as '예금상품수' 
+from account
+where b_code in(select b_code from branch where b_name in ('부산본점','울산'));
+
+select count(a.a_name) as '예금상품수' 
+from branch b join account a
+on b.b_code=a.b_code
+where b.b_name in ('부산본점','울산');
+
+select count(a.a_name) as '예금상품수' 
+from branch b join account a
+on b.b_code=a.b_code
+where b.b_name='부산본점' or b.b_name='울산';
+
+--9
+select b_name,b_addr,b_phone,b_assets
+from branch
+where b_assets >= 1000000000;
+
+--10
+update customer
+set c_addr = '부산광역시 동래구 명륜동'
+where c_name = '김정훈';
+
+select * from customer;
+
+--11.
+select b.b_name
+from branch b join account a
+on b.b_code = a.b_code
+where a.a_name = '롯데가을야구정기예금';
+
+--12
+select l_name from loan
+where l_term>=48 and l_amount =(select max(l_amount) from loan);
+
+select l_name from loan
+where l_amount =(select max(l_amount) from loan where l_term>=48);
+
+select l_name from loan
+where l_term>=48 
+order by l_amount desc limit 1;
+
+--13
+update loan
+set l_term=48,l_amount=4000000
+where l_name = '학자금대출상품';
+
+select * from loan;
+
+--14
+select l_no, l_date,l_name
+from loan
+where l_name = '새희망홀씨대출상품';
+
+--15
+select c.c_name,l.l_name,l.l_term,l.l_amount
+from customer c join customer_loan h
+on c.c_no = h.c_no join loan l
+on l.l_no = h.l_no
+where l.l_date = '2011-09-25' and l.l_term = 12;
+
+-- 16
+select c.c_name,l.l_name,l.l_term
+from customer c join customer_loan h
+on c.c_no = h.c_no join loan l
+on l.l_no = h.l_no
+where l.l_date >='2012-01-01';
+
+-- 17
+select c.c_no, sum(a.a_amount)*0.115 as '값'  
+from account a join cust_account h
+on a.a_no = h.a_no join customer c
+on h.c_no = c.c_no
+group by c.c_no;
+
+-- 모든 고객의 고객이름과 대출금액을 출력하시오. 단, 테이블명 참조를 단축하기 위해 테이블 별명을 사용하시오.
+select c.c_name,l.l_amount
+from customer c join customer_loan h
+on c.c_no = h.c_no join loan l
+on l.l_no = h.l_no;
+

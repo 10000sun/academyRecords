@@ -1,0 +1,225 @@
+create database if not exists bank;
+use bank;
+
+create table if not exists branch(
+	b_code varchar(10),
+	b_name varchar(20) not null,
+	b_addr varchar(50) not null,
+	b_phone varchar(13) not null,
+	b_assets int not null,
+	primary key(b_code)
+);
+
+create table if not exists account(
+	a_no varchar(10),
+	a_name varchar(20) not null,
+	a_dropdate date,
+	a_term int not null,
+	a_amount int,
+	b_code varchar(10),
+	primary key(a_no),
+	foreign key(b_code) references branch(b_code)
+);
+
+create table if not exists loan(
+	l_no varchar(7),
+	l_name varchar(20) not null,
+	l_date date,	
+	l_term int,
+	l_amount int,
+	b_code varchar(10),
+	primary key(l_no),
+	foreign key(b_code) references branch(b_code)
+);
+
+create table if not exists customer(
+	c_no varchar(6),
+	c_name varchar(6) not null,
+	c_addr varchar(50) not null,
+	c_phone varchar(13),
+	primary key(c_no)
+);
+
+create table if not exists customer_has_account(
+	c_no varchar(6) not null,
+	a_no varchar(10) not null,
+	constraint fk_customer_customer_has_account
+	foreign key(c_no) references customer(c_no),
+	constraint fk_account_customer_has_account
+	foreign key(a_no) references account(a_no)
+);
+
+create table if not exists customer_has_loan(
+	c_no varchar(6) not null,
+	l_no varchar(7) not null,
+	constraint fk_customer_customer_has_loan
+	foreign key(c_no) references customer(c_no),
+	constraint fk_loan_customer_has_loan
+	foreign key(l_no) references loan(l_no)
+);
+
+insert into customer values
+('C10001','강진우','서울특별시 서초구 서초동 595-10', '02-111-1111'),
+('C10002','김민규','부산광역시 수영구 남천동 33', '051-222-2222'),
+('C11001','김정훈','서울특별시 성북구 돈암동 567-1', '02-333-3333'),
+('C11002','김희래','대구광역시 수성구 범어동 45', '053-444-4444'),
+('C11003','나원호','광주광역시 광산구 송정동 63-6', '062-555-5555'),
+('C11004','성민재','대전광역시 유성구 대정동 29-4', '042-666-6666'),
+('C12001','이상우','울산광역시 남구 부거동 762', '052-777-7777'),
+('C12002','이상학','인천광역시 남동구 간석동 104', '032-888-8888'),
+('C12003','이희웅','서울특별시 강서구 화곡동 283', '02-999-9999'),
+('C12004','정인교','부산광역시 북구 덕천동 290', '051-000-0000');
+
+insert into account values
+('1100986756', '내사랑독도정기예금', NULL, 20, 3000000, 'B10001'),
+('1100761102', '하이복리정기예금', NULL, 30, 6000000, 'B30001'),
+('1100441401', '풍년기원특판예금', NULL, 50, 10000000, 'B20002'),
+('1100892234', '고금리특판예금', '2012-06-13', 60, 6000000, 'B40001'),
+('1100345641', '롯데가을야구정기예금', NULL, 40, 8000000, 'B20001'),
+('1100667709', '행복채움정기예금', NULL, 20, 4000000, 'B10002'),
+('1101233412', '베이비케어정기예금', '2012-08-31', 10, 2000000, 'B50001'),
+('1101452311', '예스월복리정기예금', NULL, 30, 4500000, 'B10003');
+
+insert into branch values
+('B10001', '서울강북', '서울특별시 강북구 1111', '02-100-1000', 1000000000),
+('B20001', '부산본점', '부산광역시 연제구 연산동 3333', '051-300-3000', 2100000000),
+('B20002', '울산', '울산광역시 남구 신정동 7777', '052-700-7000', 500000000),
+('B30001', '대구', '대구광역시 중구 동인동 4444', '053-400-4000', 800000000),
+('B40001', '광주', '광주광역시 서구 치평동 5555', '062-500-5000', 700000000),
+('B50001', '대전', '대전광역시 서구 둔산동 6666', '042-600-6000', 600000000),
+('B10002', '서울강남', '서울특별시 강남구 논현동 2222', '02-200-2000', 2000000000),
+('B10003', '인천', '인천광역시 남동구 구월동 8888', '032-800-8000', 1500000000),
+('B20003', '제주', '제주특별자치도 제주시 연동 9999', '063-900-9000', 300000000);
+
+insert into loan values
+('L110001', '근로자서민대출상품', '2011-05-01', 60, 10000000, 'B10001'),
+('L110002', '전업주부대출상품', '2011-07-01', 36, 5000000, 'B30001'),
+('L110003', '다이렉트대출상품', '2011-09-25', 12, 7000000, 'B20001'),
+('L110004', '우리신용대출상품', '2011-11-30', 24, 6000000, 'B40001'),
+('L120001', '부당산담보대출상품', '2011-12-15', 120, 50000000, 'B20002'),
+('L120002', '결혼출산장려대출상품', '2012-02-01', 48, 10000000, 'B10002'),
+('L120003', '새희망홀씨대출상품', '2012-03-14', 60, 30000000, 'B20001'),
+('L120004', '학자금대출상품', '2012-05-25', 36, 3000000, 'B10003'),
+('L120005', '중소기업신용대출상품', '2012-07-10', 60, 20000000, 'B20003'),
+('L120006', '전세자금대출상품', '2012-08-30', 90, 15000000, 'B50001');
+
+insert into customer_has_account values
+('C10001', '1100986756'),
+('C10002', '1100345641'),
+('C11001', '1100441401'),
+('C11002', '1100892234'),
+('C11003', '1100345641'),
+('C11004', '1101452311'),
+('C12001', '1101233412'),
+('C12002', '1101452311'),
+('C12003', '1100761102'),
+('C12004', '1100667709');
+
+insert into customer_has_loan values
+('C10001', 'L120001'),
+('C10002', 'L120005'),
+('C11001', 'L120002'),
+('C11002', 'L120003'),
+('C11003', 'L110001'),
+('C11004', 'L120006'),
+('C12001', 'L110004'),
+('C12002', 'L110003'),
+('C12003', 'L110002'),
+('C12004', 'L120004');
+
+==============문제================
+
+5. 문제 (※ 컬럼명이 없는 경우는 적절하게 별칭을 사용하시오.)
+1) 고객 테이블상의 모든 고객번호, 고객이름, 주소를 출력하시오. 
+select c_no, c_name, c_addr from customer;
+
+2) 예금 테이블에서 해약된 예금의 모든 컬럼을 출력하시오. 
+select * from account
+where a_dropdate is not NULL;
+
+3) 서울과 부산에 있는 고객의 고객이름, 주소, 전화번호를 출력하시오. 
+select c_name, c_addr, c_phone from customer
+where c_addr like '서울%' or c_addr like '부산%';
+
+4) 광주 지점에서 취급하는 예금계좌, 예금상품명, 계약기간, 예금액 순으로 출력하여 보시오. 
+select a_no, a_name, a_term, a_amount 
+from account a join branch b
+on a.b_code = b.b_code
+where b_name like '광주%';
+
+5) 예금계좌가 없는 지점을 출력하여 보시오. 
+select b_name from branch
+where b_code not in (select b_code from account);
+
+6) 대출 테이블에서 대출계좌, 대출상품명, 대출일, 대출기간, 대출금액 순으로 출력하여 보시오. 
+select * from loan;
+
+7) 서울 지점에서 취급하는 대출상품수를 출력하여 보시오. 
+select count(l_name) as '대출상품수'
+from loan l join branch b
+on l.b_code = b.b_code
+where b_name like '서울%';
+
+8) 부산 본점과 울산 지점에서 취급하는 예금 상품수를 출력하여 보시오. 
+select count(a_name) as '예금 상품수'
+from account a join branch b
+on a.b_code = b.b_code
+where b.b_name like '부산%' or b.b_name like '울산%';
+
+9) 자산총액이 1,000,000,000 이상인 지점명, 지점주소, 지점전화번호, 자산총액을 출력하여 보시오. 
+select b_name, b_addr, b_phone, b_assets from branch
+where b_assets >= 1000000000;
+
+10) 김정훈 고객이 이사를 가게되었다. 주소를 ‘부산광역시 동래구 명륜동’으로 수정하고 확인하여 보시오. 
+update customer
+set c_addr = '부산광역시 동래구 명륜동'
+where c_name = '김정훈';
+
+11) ‘롯데가을야구정기예금’을 취급하는 지점명을 출력하여 보시오. 
+select b_name from branch
+where b_code = (select b_code from account where a_name = '롯데가을야구정기예금');
+
+12) 대출기간이 48개월 이상인 대출계좌 중 대출금액이 가장 많은 대출상품명을 출력하여 보시오. 
+select l_name from loan
+where l_amount = (select max(l_amount) from loan where l_term >= 48);
+
+13) ‘학자금대출상품’의 대출기간을 48개월로 대출금액을 4,000,000원으로 수정하고 확인하여 보시오. 
+update loan
+set l_term = 48 and l_amount = 4000000
+where l_name = '학자금대출상품';
+
+14) 대출 테이블에서 대출번호, 대출일, 대출상품명을 출력하시오. 단, 대출상품명이 “새희망홀씨대출상품
+“인 행만 출력되도록 하시오. 
+select l_no as 대출번호, l_date as 대출일, l_name as 대출상품명 from loan
+where l_name = '새희망홀씨대출상품';
+
+15) 2012-09-25부로 1년 만기가 된 대출의 고객명, 대출상품명, 대출기간, 대출금액을 출력하여 보시오. 
+select c.c_name, l.l_name, l.l_term, l.l_amount
+from customer c join customer_has_loan cl
+on c.c_no = cl.c_no join loan l
+on l.l_no = cl.l_no
+where l.l_date = '2011-09-25' and l.l_term = 12;
+
+16) 2012년 1월 1일 이후 대출한 고객명과 대출상품, 대출일을 출력하여 보시오. 
+select c_name, l_name, l_date
+from customer c join customer_has_loan cl
+on c.c_no = cl.c_no join loan l
+on l.l_no = cl.l_no
+where l.l_date > '2012-01-01';
+
+17) 예금테이블에서 각 고객번호와 계좌번호 별로 예금액의 합에 11.5%를 곱한 것을 출력하시오. 단, 테
+이블명 참조를 단축하기 위해 테이블 별명을 사용하시오
+select c.c_no, sum(a.a_amount)*0.115 as '값'  
+from account a join customer_has_account ca
+on a.a_no = ca.a_no join customer c
+on ca.c_no = c.c_no
+group by c.c_no;
+
+18) 모든 고객의 고객이름과 대출금액을 출력하시오. 단, 테이블명 참조를 단축하기 위해 테이블 별명을 사용하시오.
+select c_name as 고객이름, l_amount as 대출금액
+from customer c join customer_has_loan cl
+on c.c_no = cl.c_no join loan l
+on cl.l_no = l.l_no;
+
+
+

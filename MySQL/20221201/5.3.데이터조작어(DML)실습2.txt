@@ -1,0 +1,99 @@
+-- 집계함수
+select max(prod_price) from products;
+
+select max(prod_price) as '최고가격' from products;
+
+select min(prod_price) as '최저가격' from products;
+
+select sum(prod_price) as '가격합계' from products;
+
+select round(avg(prod_price),2) as '가격평균' from products;
+
+select avg(prod_price) as '가격평균' from products;
+
+select count(prod_price) as '개수' from products;
+
+select count(*) as '개수' from products;
+
+select * from products
+where prod_price>=5;
+
+-- 서브쿼리 (부질의)
+
+-- 가격이 평균 이상인 모든 컬럼을 검색하시오.
+select * from products
+where prod_price >= 6.82;
+
+select * from products
+where prod_price>=(select avg(prod_price) from products);
+
+select * from products
+where prod_price=(select max(prod_price) from products);
+
+select * from products
+where prod_price=(select min(prod_price) from products);
+
+select sum(prod_price) as '합계' from products;
+
+select sum(prod_price) as '합계' from products
+group by vend_id;
+
+select vend_id,sum(prod_price) as '합계' from products
+group by vend_id;
+
+select vend_id,sum(prod_price) as '합계' from products
+group by vend_id
+having sum(prod_price)>=18;
+
+-- union / union all
+
+select * from customers
+where cust_state in ('IL','IN','MI');
+
+select * from customers
+where cust_name='Fun4All';
+
+select * from customers
+where cust_state in ('IL','IN','MI')
+union
+select * from customers
+where cust_name='Fun4All';
+
+select * from customers
+where cust_state in ('IL','IN','MI')
+union all
+select * from customers
+where cust_name='Fun4All';
+
+-- join
+select c.cust_id,c.cust_name,c.cust_address,o.order_num,o.order_date
+from customers c join orders o
+on c.cust_id = o.cust_id;
+
+select c.cust_id,c.cust_name,c.cust_address,o.order_num,o.order_date
+from customers c join orders o
+on c.cust_id = o.cust_id
+where o.order_num=20005;
+
+select c.cust_id,c.cust_name,c.cust_address,o.order_num,o.order_date
+from customers c,orders o
+where c.cust_id = o.cust_id;
+
+select c.cust_id,c.cust_name,c.cust_address,o.order_num,o.order_date
+from customers c, orders o
+where c.cust_id = o.cust_id
+and o.order_num=20005;
+
+-- 3개의 테이블에서 원하는 컬럼 조회
+1) customers c --> cust_id, cust_name, cust_email
+2) orders o1 --> order_num,order_date
+3) orderitems o2 --> prod_id,item_price
+
+select c.cust_id,c.cust_name,c.cust_email,o1.order_num,o1.order_date,o2.prod_id,o2.item_price
+from customers c join orders o1
+on c.cust_id=o1.cust_id join orderitems o2
+on o1.order_num=o2.order_num;
+
+select c.cust_id,c.cust_name,c.cust_email,o1.order_num,o1.order_date,o2.prod_id,o2.item_price
+from customers c,orders o1,orderitems o2
+where c.cust_id=o1.cust_id and o1.order_num=o2.order_num;

@@ -1,0 +1,60 @@
+* DCL (Data Control Language)
+grant --> 데이터베이스 사용자 권한 부여
+revoke --> 데이터베이스 사용자 권한 회수
+
+* TCL (Transaction Control Language)
+commit --> 트랜잭션을 완료하여 데이터 변경사항을 최종 반영하는 명령어
+rollback --> 데이터 변경사항을 이전 상태로 되돌리는 명령어
+savepoint --> 지정된 특정 시점까지 되돌릴 수 있는 명령어
+
+MySQL 은 기본적으로 Auto commit을 이용한다.
+--> Auto commit 설정 여부 확인
+select @@autocommit;
+--> 이 명령의 결과가 1이면 설정
+--> set autocommit=false; -- Autocommit 해제
+
+- 실습예제 -
+
+create database if not exists test;
+
+use test;
+
+create table if not exists member(
+	id varchar(20),
+	pwd varchar(20),
+	addr varchar(50),
+	tel varchar(15),
+	primary key(id)
+);
+
+desc member;
+
+insert into member(id,pwd,addr,tel) values ('tg06','1111','부산','010-1234-5678');
+insert into member(id,pwd,addr,tel) values ('tg07','2222','서울','010-2345-5678');
+
+select * from member;
+
+savepoint a;
+
+update member
+set addr='창원'
+where id='tg06';
+
+select * from member;
+
+savepoint b;
+
+delete from member
+where id='tg07';
+
+select * from member;
+
+rollback to savepoint b;
+
+select * from member;
+
+rollback to savepoint a;
+
+select * from member;
+
+rollback;

@@ -1,0 +1,176 @@
+※ 아래의 지시사항에 따라 실습하여 보시오.
+1) exam 데이터베이스를 생성하고 지정하시오.
+create database if not exists exam;
+use exam;
+
+2) customers 테이블의 구조를 확인하여 보고 모든 컬럼을 출력하여 보시오.
+desc customers;
+select * from customers;
+
+3) products 테이블에서 prod_name, prod_price 컬럼을 출력하여 보시오. 단, prod_name을 내림차순 정렬하시오.
+select prod_name, prod_price from products
+order by prod_name desc;
+
+4) products 테이블에서 prod_price 컬럼이 7이상인 모든 컬럼을 출력하여 보시오.
+select * from products
+where prod_price >=7;
+
+5) products 테이블에서 prod_name이 doll이라고 들어간 prod_id와 prod_price 컬럼을 검색하여 보시오.
+select prod_id, prod_price from products
+where prod_name like '%doll%';
+
+6) products 테이블에서 prod_id가 R로 시작하는 모든 컬럼을 검색하여 보시오. 단, prod_name을 오름차순 정렬하시오.
+select * from products
+where prod_id like 'R%'
+order by prod_name asc;
+
+7) products 테이블에서 prod_price의 최대값을 출력하여 보시오.
+select max(prod_price) from products;
+
+8) products 테이블에서 prod_price 컬럼이 5이상인 것의 합계를 출력하여 보시오.
+select sum(prod_price>=5) from products;
+
+9) products 테이블에서 prod_price 컬럼이 5에서 8사이의 모든 컬럼을 출력하여 보시오.
+select * from products
+where prod_price between 5 and 8;
+
+10) products 테이블에서 prod_price가 제일 높은 prod_name을 출력하여 보시오.
+select prod_name from products
+where prod_price=(select max(prod_price) from products);
+
+11) orderitems 테이블의 구조를 확인하여 보고 모든 컬럼을 출력하여 보시오.
+desc orderitems;
+select * from orderitems;
+
+12) orderitems 테이블에서 order_num(주문번호)이 20008인 prod_id,quantity,item_price 컬럼을 출력하여 보시오.
+select prod_id, quantity, item_price from orderitems
+where order_num = 20008;
+
+13) orderitems 테이블에서 prod_id, quantity,item_price, 수량(quantity)*단가(item_price) 순으로 출력하여 보시오. 단, 수량*단가의 컬럼명은 가격이라는 이름으로 출력하시오.
+select prod_id, quantity, item_price, quantity*item_price as '가격' from orderitems;
+
+14) 13)을 prod_id를 내림차순 정렬하여 출력하여 보시오.
+select prod_id, quantity, item_price, quantity*item_price as '가격' from orderitems
+order by prod_id desc;
+
+15) 13)에서 가격이 가장 높은 prod_id를 출력하여 보시오.
+select prod_id from orderitems
+where quantity*item_price = (select max(quantity*item_price) from products);
+
+16) orders 테이블에서 order_date(주문일)이 2004년 1월 1일부터 2004년 1월30일까지인 모든 컬럼을 출력하시오.
+select * from orders
+where order_date between '2004-01-01' and '2004-01-30';
+
+17) products 테이블에서 prod_price(가격)이 평균 이상인 prod_name, prod_price 컬럼을 출력하여 보시오.
+select prod_name, prod_price from products
+where prod_price >= (select avg(prod_price)from products);
+
+18) products 테이블에서 prod_name(상품명) 중 toy 가 들어가는 것의 모든 컬럼을 출력하여 보시오. 단, prod_name을 내림차순 정렬하여 출력하시오.
+select * from products
+where prod_name like '%toy%'
+order by prod_name desc;
+
+19) customers 테이블에서 cust_name(고객명)이 F로 시작하는 고객수를 출력하여 보시오. 단, 고객수 컬럼명은 고객수로 출력하여 보시오.
+select count(cust_id) as '고객수' from customers
+where cust_name like 'F%';
+
+20) products 테이블에서 vend_id가 D로 시작하는 개수를 공급업체수라는 컬럼명으로 출력하여 보시오.
+select count(vend_id) as '공급업체수' from products
+where vend_id like 'D%';
+
+21) products 테이블에서 prod_name이 King doll인 것의 prod_id, prod_price, prod_name 순으로 컬럼을 출력하여 보시오.
+select prod_id, prod_price, prod_name from products
+where prod_name = 'King doll';
+
+22) vendors 테이블에서 vend_city가 London인 것의 vend_name을 출력하여 보시오.
+select vend_name from vendors
+where vend_city = 'London';
+
+23) orderitems 테이블에서 order_num(주문번호)이 20008인 prod_id,quantity,item_price 최상위 1개행만 출력하여 보시오. 단, prod_id를 내림차순 정렬하시오.
+select prod_id,quantity,item_price from orderitems
+where order_num = 20008
+order by prod_id desc limit 1;
+
+24) products 테이블에서 vend_id 컬럼이 중복된 것을 제외한 컬럼을 출력하여 보시오.
+select distinct vend_id from products;
+
+25) customers 테이블에서 cust_state가 'IL','IN','MI'인 cust_name, cust_contact, cust_email 컬럼을 출력하시오.
+select cust_name, cust_contact, cust_email from customers
+where cust_state in('IL','IN','MI');
+
+26) customers 테이블에서 cust_name이 'Fun4All'인 cust_name, cust_contact, cust_email 컬럼을 출력하시오.
+select cust_name, cust_contact, cust_email from customers
+where cust_name = 'Fun4All';
+
+27) vendors테이블과 products테이블을 조인하여 prod_name, vend_name, prod_price 컬럼을 출력하여 보시오.
+select p.prod_name, v.vend_name, p.prod_price 
+from vendors v join products p
+on p.vend_id = v.vend_id;
+
+28) 27)에서 vend_name에 'Doll'이 들어가는 것만 출력하시오.
+select p.prod_name, v.vend_name, p.prod_price 
+from vendors v join products p
+on p.vend_id = v.vend_id
+where v.vend_name like '%Doll%';
+
+29) customers 테이블에서 cust_zip (우편번호)가 '43333'인 cust_name (고객)을 출력하여 보시오.
+select cust_name from customers
+where cust_zip = '43333';
+
+30) customers 테이블에서 cust_state (고객이 거주하는 주)가 'MI(마이애미)'와 'IL(일리노이)'를 제외하고 모든 컬럼을 출력하여 보시오.
+select * from customers
+where cust_state not in('MI','IL');
+
+31) customers 테이블에서 cust_city (고객이 거주하는 시)가 C로 시작하는 고객수를 출력하여 보시오.
+select count(cust_id) as '고객수' from customers
+where cust_city like 'C%';
+
+32) orders 테이블에서 order_num (주문번호)가 20007인 customers 테이블에서 cust_name (고객명)을 출력하여 보시오.
+select c.cust_name 
+from orders o join customers c
+on c.cust_id = o.cust_id
+where o.order_num = 20007;
+
+33) orderitems 테이블에서 order_item, quantity (수량)의 합계를 출력하여 보시오. 단, order_item은 내림차순 정렬하시오.
+select order_item, sum(quantity) from orderitems
+group by order_item
+order by order_item desc;
+
+34) products 테이블에서 vend_id (업체아이디) 컬럼과 prod_price (가격)의 합계를 출력하여 보시오.
+select vend_id, sum(prod_price) from products
+group by vend_id;
+
+35) products 테이블에서 vend_id (업체아이디) 컬럼과 prod_price (가격)의 합계를 출력하여 보시오. 단, vend_id는 내림차순 정렬하시오.
+select vend_id, sum(prod_price) from products
+group by vend_id
+order by vend_id desc;
+
+36) orderitems 테이블에서 item_price가 평균 이하인 prod_id, quantity의 합계를 출력하여 보시오.
+select prod_id, sum(quantity) from orderitems
+where item_price <=(select avg(item_price) from orderitems)
+group by prod_id;
+
+37) prod_id가 BR01의 prod_price와 quantity 를 출력하여 보시오.
+select p.prod_price, o.quantity 
+from orderitems o join products p
+on o.prod_id = p.prod_id
+where p.prod_id = 'BR01';
+
+38) 주문일 (order_date)이 2월인 고객 (cust_name)을 출력하여 보시오.
+select c.cust_name 
+from orders o join customers c
+on o.cust_id = c.cust_id
+where o.order_date like '2004-02%';
+
+39) item_price (가격)이 가장 높은 prod_name (상품명)을 출력하여 보시오.
+select distinct prod_name
+from orderitems o join products p
+on o.prod_id = p.prod_id
+where item_price = (select max(item_price) from orderitems);
+
+40) orders 테이블에서 고객아이디 (cust_id)가 1000000001인 cust_address, cust_city, cust_state, cust_zip (주소)를 출력하여 보시오.
+select distinct c.cust_address, c.cust_city, c.cust_state, c.cust_zip as '주소'
+from orders o join customers c
+on o.cust_id = c.cust_id
+where o.cust_id = 1000000001;
+

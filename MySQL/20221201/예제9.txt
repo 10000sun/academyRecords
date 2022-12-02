@@ -1,0 +1,72 @@
+※ 아래의 지시사항에 따라 실습하여 보시오.
+1) exam 데이터베이스를 생성하고 지정하시오.
+create database if not exists exam;
+use exam;
+
+2) vendors 테이블의 구조를 확인하여 보고 모든 컬럼을 출력하여 보시오.
+desc vendors;
+select * from vendors;
+
+3) products 테이블의 구조를 확인하여 보고 모든 컬럼을 출력하여 보시오.
+desc products;
+select * from products;
+
+4) vendors 테이블과 products 테이블에서 vend_name, prod_name, prod_price 컬럼을 출력하여 보시오. 
+select v.vend_name, p.prod_name, p.prod_price
+from vendors v join products p
+on v.vend_id = p.vend_id;
+
+5) 문제 4)번에서 prod_price가 평균이상인 컬럼을 출력하여 보시오. 
+select v.vend_name, p.prod_name, p.prod_price
+from vendors v join products p
+on v.vend_id = p.vend_id
+where p.prod_price >= (select avg(prod_price) from products);
+
+
+6) 문제 4)번에서 prod_price가 최고가격을 출력하여 보시오. 
+select v.vend_name, p.prod_name, p.prod_price
+from vendors v join products p
+on v.vend_id = p.vend_id
+where p.prod_price = (select max(prod_price) from products);
+
+
+7) 문제 5)번의 쿼리문을 vendorsproducts1이라는 이름의 뷰를 생성하여 보시오.
+create view vendorsproducts1 
+as
+select vend_name, prod_name, prod_price
+from vendors v join products p
+on v.vend_id = p.vend_id
+where prod_price >= (select avg(prod_price) from products);
+
+
+8) 문제 7)번에서 생성한 뷰를 출력하여 보시오.
+select * from vendorsproducts1;
+
+9) 문제 6)번의 쿼리문을 vendorsproducts2이라는 이름의 뷰를 생성하여 보시오.
+create view vendorsproducts2
+as
+select v.vend_name, p.prod_name, p.prod_price
+from vendors v join products p
+on v.vend_id = p.vend_id
+where p.prod_price = (select max(prod_price) from products);
+
+
+10) 문제 9)번에서 생성한 뷰를 출력하여 보시오.
+select * from vendorsproducts2;
+
+11) 위에서 생성한 뷰를 제거하여 보시오.
+drop view vendorsproducts2;
+
+12) customers 테이블에서 인덱스를 확인하여 보시오. 인덱스의 개수는 몇 개인가?
+show index from customers;
+1개
+
+13) customers 테이블에서 cust_name 컬럼의 인덱스를 생성하여 보시오. (인덱스명 : idx_cust_name)
+create index idx_cust_name on customers(cust_name);
+
+14) 13)에서 생성한 인덱스를 확인하여 보시오. 인덱스의 개수는 몇 개인가?
+show index from customers;
+2개
+
+15) 13)에서 생성한 인덱스를 제거하여 보고 확인하여 보시오.
+alter table customers drop index idx_cust_name;

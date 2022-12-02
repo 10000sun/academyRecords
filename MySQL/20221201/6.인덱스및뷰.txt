@@ -1,0 +1,78 @@
+* 인덱스 (Index)
+: 데이터를 빠르게 찾을 수 있는 수단으로서 테이블에 대한 조회 속도를 높여주는 자료구조
+--> 기본키 (primary key)와 unique 제약조건으로 테이블 생성시 자동으로 인덱스가 생성됨
+1) 인덱스 생성 : create index 인덱스이름 on 테이블명(컬럼명,...);
+2) 인덱스 확인 : show index from 테이블명;
+3) 인덱스 제거 : alter table 테이블명 drop index 인덱스이름;
+
+* 뷰(view): 가상의 논리 테이블
+1) 뷰생성 : create view 뷰이름 as 질의문;
+2) 뷰제거 : drop view 뷰이름;
+3) 뷰실행 : select * from 뷰이름;
+4) 뷰확인 : show tables;
+
+-- 데이터베이스 생성
+create database if not exists nms;
+
+--데이터베이스 지정
+use nms;
+
+-- 테이블 생성
+create table if not exists member(
+	num int auto_increment,
+	name varchar(20) not null,
+	tel varchar(15) unique not null,
+	addr varchar(50),
+	etc text,
+	primary key(num)
+);
+
+-- 테이블 구조보기
+desc member;
+-- describe member; 
+
+-- 테이블에 컬럼 추가
+alter table member add email varchar(30);
+
+-- 테이블에 컬럼 제거
+alter table member drop etc;
+
+-- 테이블에 컬럼 수정
+alter table member modify email varchar(40);
+
+-- 인덱스 생성
+create index idx_name on member(name);
+
+-- 인덱스 확인 
+show index from member;
+
+-- 인덱스 생성
+create unique index idx_tel on member(tel);
+
+-- 인덱스 확인 
+show index from member;
+
+-- 인덱스 제거
+alter table member drop index idx_name;
+
+-- 인덱스 확인 
+show index from member;
+
+use exam;
+
+show tables;
+
+-- 뷰 생성
+create view view1
+as
+select prod_id, quantity,item_price, quantity*item_price as '가격' 
+from orderitems;
+
+-- 뷰 생성 확인
+show tables;
+
+-- 뷰 조회
+select * from view1
+
+-- 뷰 제거
+drop view view1;
