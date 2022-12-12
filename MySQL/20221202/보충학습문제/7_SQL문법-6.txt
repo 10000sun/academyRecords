@@ -1,0 +1,94 @@
+1-1 인덱스 (Index)
+: 데이터를 빠르게 찾을 수 있는 수단으로서 테이블에 대한 조회 속도를 높여주는 자료구조
+
+1-2
+1) 인덱스 생성 : create index 인덱스이름 on 테이블명(컬럼명,...);
+2) 인덱스 확인 : show index from 테이블명;
+3) 인덱스 제거 : alter table 테이블명 drop index 인덱스이름;
+
+1-3 트리거 (Trigger) "방아쇠"
+: insert, update, delete문이 table에 대해 수행되는 프로시저
+트리거는 뷰에 대해서가 아니라 테이블에서만 정의
+
+1-4
+1) 트리거 생성
+delimiter //
+create trigger 트리거명
+	시점 이벤트 on 부착할 테이블명
+	for each row -- 행트리거 (행마다 실행)
+begin
+	실행문장;
+end //
+delimiter ;
+
+--> 시점 : before, after
+--> 이벤트 : insert, update, delete
+
+2) 트리거 제거
+drop trigger 트리거명;
+
+2-1
+create database if not exists nms;
+
+use nms;
+
+2-2
+create table if not exists members(
+	num int auto_increment,
+	name varchar(20) not null,
+	tel varchar(15) not null,
+	addr varchar(50),
+	etc text,
+	primary key(num)
+);
+
+
+2-3
+desc members;
+
+2-4
+alter table members add column email varchar(20);
+
+desc members;
+
+2-5
+alter table members drop column etc;
+
+desc members;
+
+2-6
+alter table members modify email varchar(30);
+
+desc members;
+
+2-7
+create index idx_members on members(name);
+--> 현재 인덱스의 개수는? 2개 (num(pk), name)
+
+2-8
+show index from members;
+
+2-9
+alter table members drop index idx_members;
+--> 현재 인덱스의 개수는? 1개 (num(pk))
+
+show index from members;
+
+2-10
+delimiter $$
+create trigger testTrg 
+	after insert 
+	on members
+	for each row
+begin
+	SET @msg="입력 트리거 발생!";
+end $$
+delimiter ;
+
+insert into members(name,tel,addr,email) values
+('홍길동','010-1111-1111','부산','abc@naver.com');
+
+select @msg;
+
+2-11
+drop trigger testTrg;

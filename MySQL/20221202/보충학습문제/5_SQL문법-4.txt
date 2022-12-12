@@ -1,0 +1,86 @@
+1-1 group by / having ★★★
+: 데이터를 그룹화하여 집계함수와 같이 사용하여 출력하며 having은 집계함수를 사용한 조건절이다. 엑셀의 부분합 기능과 유사
+
+1-2 union / union all  
+: 쿼리를 결합시켜 중복된 내용은 제거하며 union all은 중복값을 출력시켜 준다.
+
+1-3 Join (조인)
+: 2개 이상의 테이블에서 결과값을 검색하고자 할 때 사용
+
+※ ANSI 문법
+select * 
+from 테이블1 별칭 join 테이블2 별칭
+on 테이블1의 별칭.공통컬럼 = 테이블2의 별칭.공통컬럼;
+
+※ T-SQL 문법
+select * 
+from 테이블1 별칭, 테이블2 별칭
+where 테이블1의 별칭.공통컬럼 = 테이블2의 별칭.공통컬럼;
+
+* 제한된 행 출력
+select * from 테이블명
+order by 컬럼명 limit a;
+
+2-1
+create database if not exists exam;
+
+show databases;
+
+use exam;
+ 
+2-2
+desc products;
+
+select * from products;
+
+2-3
+select distinct vend_id from products;
+
+2-4
+select vend_id,avg(prod_price) as '평균' from products
+group by vend_id;
+
+2-5
+select prod_id,quantity,quantity*item_price as '판매가격'
+from orderitems
+order by quantity*item_price desc limit 1;
+
+2-6
+select vend_id,sum(prod_price) as '합계' from products
+group by vend_id;
+
+2-7
+select prod_id,quantity,item_price from orderitems
+order by quantity desc limit 3;
+
+2-8
+select cust_id,count(cust_id) as '개수' from orders
+group by cust_id
+having count(cust_id)>=2;
+
+2-9
+select * from customers
+where cust_state in ('IL','IN','MI');
+
+2-10
+select * from customers
+where cust_name='Fun4All';
+
+2-11
+select * from customers
+where cust_state IN ('IL','IN','MI')
+union
+select * from customers
+where cust_name='Fun4All';
+
+2-12
+desc vendors;
+desc products;
+
+select v.vend_name,p.prod_name,p.prod_price
+from vendors v join products p
+on v.vend_id=p.vend_id;
+
+select v.vend_name,p.prod_name,p.prod_price
+from vendors v,products p
+where v.vend_id=p.vend_id;

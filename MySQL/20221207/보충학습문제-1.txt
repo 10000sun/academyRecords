@@ -1,0 +1,36 @@
+create database if not exists nms;
+use nms;
+
+create table if not exists member(
+	no int auto_increment,
+	name varchar(20) not null,
+	tel varchar(20),
+	addr varchar(50),
+	license enum('y','n') null,
+	primary key(no)
+);
+
+insert into member(name, tel, addr, license) values
+('김승용', '051-123-4567', '부산광역시 남구 대연동', 'y'),
+('김양호', '051-890-1234', '부산광역시 사상구 학장동', 'n'),
+('임정제', '02-1234-1234', '서울특별시 강남구 삼성동', 'n'),
+('김재호', '052-098-7654', '울산광역시 남구 야음동', 'n'),
+('전용진', '043-456-4567', '충청남도 논산군 논산읍', 'y'),
+('황인용', '051-234-1234', '부산광역시 연제구 연산동', 'n'),
+('박지호', '031-345-6789', '인천광역시 남구 주안동', 'y');
+
+select * from member;
+
+update member
+set name = '이우승'
+where no = 1;
+
+delete from member
+where no = 3;
+
+delete from member
+where addr like '충청남도%';
+
+update member
+set license = 'y'
+where addr like '부산광역시%';

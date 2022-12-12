@@ -1,0 +1,105 @@
+1-1 select문
+select 컬럼명,... (모든 컬럼일 경우 *) as '별칭' 
+from 테이블명
+where 컬럼명 조건절
+order by 컬럼명 asc(오름차순)/desc(내림차순);
+
+※ 중복행 제거 --> distinct
+
+1-2 집계함수
+1) 최대값 : max( )
+2) 최소값 : min( )
+3) 합계 : sum( )
+4) 평균 : avg( )
+5) 개수 : count( )
+
+* select문에서 집계함수 사용
+select 집계함수(컬럼명) as '별칭'
+from 테이블명
+where 컬럼명 조건절
+order by 컬럼명 asc(오름차순)/desc(내림차순);
+
+2-1
+create database if not exists exam;
+
+use exam;
+ 
+2-2
+desc orders;
+select * from orders;
+
+2-3
+select prod_id,prod_name,prod_price
+from products
+order by prod_id asc;
+
+2-4
+select prod_name
+from products
+where prod_price>=4;
+
+2-5
+select prod_name,prod_price
+from products
+where prod_name like '%bean%'
+order by prod_price desc;
+
+2-6
+select *
+from products
+where prod_id like 'R%'
+order by prod_name desc;
+
+2-7
+select sum(prod_price) as '합계'
+from products;
+
+2-8
+select avg(prod_price) as '평균'
+from products
+where prod_price>=4;
+
+2-9
+select sum(prod_price) as '합계'
+from products
+where prod_price between 5 and 8;
+
+select sum(prod_price) as '합계'
+from products
+where prod_price>=5 and prod_price<=8; 
+
+2-10
+select prod_name
+from products
+where prod_price=(select min(prod_price) from products);
+
+select prod_name
+from products
+order by prod_price desc limit 1;
+
+
+2-11
+select *
+from products
+where prod_price>=(select avg(prod_price) from products)
+order by prod_name asc;
+
+2-12
+select *
+from vendors
+where vend_name like 'B%';
+
+2-13
+select *
+from vendors
+where vend_name='Doll House Inc.';
+
+2-14
+select sum(quantity) as '합계'
+from orderitems
+where prod_id='BR03';
+
+2-15
+select count(*) as '주문횟수'
+from orderitems
+where prod_id='BNBG01';

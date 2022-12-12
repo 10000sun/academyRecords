@@ -1,0 +1,193 @@
+create database if not exists fund;
+
+use fund;
+
+create table if not exists depts(
+	d_code varchar(10),
+	d_name varchar(10),
+	d_loc varchar(20),
+	d_phone char(15),
+	primary key(d_code)
+);
+
+create table if not exists emps(
+	e_no varchar(10),
+	e_name varchar(10),
+	e_addr varchar(20),
+	e_hiredate date,
+	d_code varchar(10),
+	primary key(e_no),
+	foreign key(d_code) references depts(d_code)
+);
+
+create table if not exists customer(
+	c_code varchar(10),
+	c_name varchar(10),
+	c_quantity int,
+	e_no varchar(10),
+	primary key(c_code),
+	foreign key(e_no) references emps(e_no)
+);
+
+create table if not exists funds(
+	f_no varchar(10),
+	f_name varchar(20),
+	f_fee int,
+	f_paycount int,
+	primary key(f_no)
+);
+
+create table if not exists depts_funds(
+	d_code varchar(10),
+	f_no varchar(10),
+	constraint depts_funds_depts
+	foreign key(d_code) references depts(d_code),
+	constraint depts_funds_funds
+	foreign key(f_no) references funds(f_no)
+);
+
+create table if not exists customer_funds(
+	c_code varchar(10),
+	f_no varchar(10),
+	constraint customer_funds_customer
+	foreign key(c_code) references customer(c_code),
+	constraint customer_funds_funds
+	foreign key(f_no) references funds(f_no)
+);
+
+
+insert into depts values
+('D0001','국내펀드','부산광역시','051-111-9999'),
+('D0002','해외펀드','부산광역시','051-222-9999'),
+('D0003','국내펀드','울산광역시','052-333-9999'),
+('D0004','국내펀드','대구광역시','053-444-9999'),
+('D0005','해외펀드','서울특별시','02-555-9999'),
+('D0006','국내펀드','경상남도 창원시','055-666-9999'),
+('D0007','해외펀드','충청남도 아산시','041-777-9999'),
+('D0008','해외펀드','전라도 광주시','061-888-9999'),
+('D0009','국내펀드','경기도 의왕시','031-999-9999'),
+('D0010','국내펀드','제주특별자치도','051-000-0000');
+
+insert into emps values
+('E0001','홍길동','부산광역시','2020-12-01','D0001'),
+('E0002','김놀부','울산광역시','2020-12-14','D0003'),
+('E0003','최흥부','울산광역시','2019-01-14','D0003'),
+('E0004','차정원','대구광역시','2019-04-05','D0004'),
+('E0005','김원준','제주특별자치도','2019-08-15','D0010'),
+('E0006','고관민','서울특별시','2020-05-05','D0005'),
+('E0007','김민준','충청남도 아산시','2020-10-15','D0007'),
+('E0008','신혜인','경상남도 창원시','2020-09-25','D0006'),
+('E0009','정희수','전라도 광주시','2019-09-25','D0008'),
+('E0010','장민준','경기도 의왕시','2019-09-25','D0009');
+
+insert into customer values
+('C0001','김일성',3,'E0003'),
+('C0002','김이성',2,'E0006'),
+('C0003','김삼성',4,'E0002'),
+('C0004','김사성',2,'E0010'),
+('C0005','김오성',8,'E0001'),
+('C0006','김육성',1,'E0009'),
+('C0007','김칠성',1,'E0008'),
+('C0008','김팔성',8,'E0007'),
+('C0009','김구성',3,'E0005'),
+('C0010','김십성',2,'E0004');
+
+insert into funds values
+('F0001','펀드01',100000, 10),
+('F0002','펀드02',150000, 22),
+('F0003','펀드03',530000, 15),
+('F0004','펀드04',7550000, 46),
+('F0005','펀드05',20000, 13),
+('F0006','펀드06',340000, 15),
+('F0007','펀드07',230000, 12),
+('F0008','펀드08',60000, 2),
+('F0009','펀드09',150000, 5),
+('F0010','펀드10',340000, 9);
+
+insert into depts_funds values
+('D0006','F0006'),
+('D0009','F0008'),
+('D0005','F0001'),
+('D0004','F0010'),
+('D0001','F0004'),
+('D0010','F0007'),
+('D0002','F0003'),
+('D0007','F0005'),
+('D0008','F0002'),
+('D0003','F0009');
+
+insert into customer_funds values
+('C0001','F0001'),
+('C0001','F0005'),
+('C0001','F0004'),
+('C0002','F0002'),
+('C0002','F0007'),
+('C0003','F0002'),
+('C0003','F0003'),
+('C0003','F0009'),
+('C0003','F0001'),
+('C0004','F0010'),
+('C0004','F0007'),
+('C0005','F0002'),
+('C0005','F0009'),
+('C0005','F0008'),
+('C0005','F0007'),
+('C0005','F0003'),
+('C0005','F0001'),
+('C0005','F0004'),
+('C0005','F0005'),
+('C0006','F0002'),
+('C0007','F0006'),
+('C0008','F0007'),
+('C0008','F0006'),
+('C0008','F0003'),
+('C0008','F0002'),
+('C0008','F0005'),
+('C0008','F0001'),
+('C0008','F0003'),
+('C0008','F0009'),
+('C0009','F0003'),
+('C0009','F0007'),
+('C0009','F0009'),
+('C0010','F0004'),
+('C0010','F0006');
+
+5. 문제 (결과 Instance를 1번-3번까지 7건 이상, 4번-5번은 2건 이상으로 출력)
+
+1) 고객 테이블상의 모든 고객코드, 고객이름, 보험가입수를 출력하시오. 
+select c_code, c_name, c_quantity from customer;
+
+2) 펀드상품테이블에서 펀드번호, 펀드명, 납입금, 납입횟수를 출력하시오. 단, 질의 결과 납입금이 100,000 만원 이상인 행만 출력되도록 하시오. 
+select f_no, f_name, f_fee, f_paycount from funds where f_fee >=100000;
+
+3) ’해외펀드’부서에서 근무하는 직원 이름, 주소, 부서명을 출력하시오. 테이블명 
+참조를 단축하기 위해 테이블 별명을 사용하시오. 
+select e_name as 직원이름, e_addr as 직원주소, d_name as 부서명
+from emps e join depts d
+on d.d_code = e.d_code
+where d.d_name = '해외펀드';
+
+4) 펀드가입수가 2개 이상인 고객 이름, 펀드상품명, 펀드가입수를 출력하시오. 테이블명 참조를 단축하기 위해 테이블 별명을 사용하시오. 
+select distinct c_name as 고객명, f_name as 펀드명, c_quantity as 펀드가입수
+from customer c join customer_funds cf
+on c.c_code = cf.c_code join funds f
+on cf.f_no = f.f_no
+where c.c_quantity >= 2;
+
+5) 3년 이상 납입한 고객의 납입원금, 담당 부서명을 출력하시오. 테이블명 참조
+를 단축하기 위해 테이블 별명을 사용하시오. 
+select f_fee, d_name 
+from funds f join depts_funds
+
+6) 5)에서 조회된 내용을 확인한 후 뷰를 생성하시오. 
+
+
+7) 6)에서 생성한 뷰를 조회하시오. 
+
+
+8) 고객테이블에 고객이름 컬럼의 인덱스를 생성하여 보시오. 
+
+
+9) 8)에서 생성한 인덱스를 확인하여 보시오.
+
+

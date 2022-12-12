@@ -1,0 +1,38 @@
+create database if not exists exam;
+
+use exam;
+
+select cust_name, cust_contact, cust_email from customers
+where cust_state in('OH','AZ');
+
+delimiter //
+create procedure mproc(in state1 varchar(10),in state2 varchar(10))
+begin
+	select cust_name, cust_contact, cust_email from customers
+	where cust_state in(state1, state2);
+end //
+delimiter ;
+
+call mproc('IL','MI');
+
+drop procedure mproc;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,105 @@
+1-1 뷰(view): 가상의 논리 테이블
+
+1-2
+1) 뷰생성 : create view 뷰이름 as 질의문;
+2) 뷰제거 : drop view 뷰이름;
+3) 뷰실행 : select * from 뷰;
+
+1-3
+alter문 : 업데이트 (변화)
+1) 테이블 컬럼 추가
+alter table 테이블명 add column (컬럼명 자료형 [옵션]);
+
+2) 테이블 컬럼 제거
+alter table 테이블명 drop column 컬럼명;
+
+1-4
+1) grant(권한 부여), revoke(권한 제거)
+2) commit(작업완료), rollback(작업이 완료되지 않은 경우 트랜잭션 처리)
+
+1-5 저장프로시저
+--> MySQL 에서 제공하는 프로그래밍
+--> 쿼리문의 집합으로 어떠한 동작을 일괄처리하기 위한 용도로 사용
+--> 사용하려면 호출해서 사용
+
+2-1
+create database if not exists exam;
+use exam;
+ 
+2-2
+desc vendors;
+select * from vendors;
+
+2-3
+desc products;
+select * from products;
+
+2-4
+select v.vend_name,p.prod_name,p.prod_price
+from vendors v join products p
+on v.vend_id=p.vend_id;
+
+select v.vend_name,p.prod_name,p.prod_price
+from vendors v,products p
+where v.vend_id=p.vend_id;
+
+2-5
+select vend_name,prod_name,prod_price
+from vendors v join products p
+on v.vend_id=p.vend_id 
+where p.prod_price>=(select avg(prod_price) from products);
+
+select vend_name,prod_name,prod_price
+from vendors v,products p
+where v.vend_id=p.vend_id 
+and p.prod_price>=(select avg(prod_price) from products);
+
+2-6
+select vend_name,prod_name,prod_price
+from vendors v join products p
+on v.vend_id=p.vend_id
+order by p.price desc limit 1;
+
+select vend_name,prod_name,prod_price
+from vendors v,products p
+where v.vend_id=p.vend_id
+order by p.price desc limit 1;
+
+2-7
+create view vendorsproducts1
+as
+select vend_name,prod_name,prod_price
+from vendors v join products p
+on v.vend_id=p.vend_id 
+where p.prod_price>=(select avg(prod_price) from products);
+create view vendorsproducts1
+as
+select vend_name,prod_name,prod_price
+from vendors v,products p
+where v.vend_id=p.vend_id 
+and p.prod_price>=(select avg(p.prod_price) from p);
+
+2-8
+select * from vendorsproducts1;
+
+2-9
+create view vendorsproducts2
+as
+select vend_name,prod_name,prod_price
+from vendors v join products p
+on v.vend_id=p.vend_id
+order by p.price desc limit 1;
+
+create view vendorsproducts2
+as
+select vend_name,prod_name,prod_price
+from vendors v,products p
+where v.vend_id=p.vend_id
+order by p.price desc limit 1;
+
+2-10
+select * from vendorsproducts2;
+
+2-11
+drop view vendorsproducts1;
+drop view vendorsproducts2;

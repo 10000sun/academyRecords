@@ -1,0 +1,63 @@
+create database if not exists exam;
+
+use exam;
+
+select * from orders;
+
+select prod_id, prod_name, prod_price from products 
+order by prod_id asc;
+
+select prod_name from products
+where prod_price >= 4;
+
+select prod_name, prod_price from products
+where prod_name like '%bean%'
+order by prod_price desc;
+
+select * from products
+where prod_id like 'R%'
+order by prod_name desc;
+
+select sum(prod_price) from products;
+
+select avg(prod_price) from products
+where prod_price >= 4;
+
+select sum(prod_price) from products
+where prod_price between 5 and 8;
+
+select prod_name from products
+where prod_price = (select min(prod_price) from products);
+
+select * from products
+where prod_price >= (select avg(prod_price) from products)
+order by prod_name asc;
+
+select * from vendors
+where vend_name like 'B%';
+
+select * from vendors
+where vend_name = 'Doll House inc.';
+
+select sum(quantity) from orderitems
+where prod_id = 'BR03';
+
+select * from orderitems;
+
+select * from orders;
+
+select order_item from orderitems
+where prod_id = 'BNBG01';
+
+
+
+
+
+
+
+
+
+
+
+
+

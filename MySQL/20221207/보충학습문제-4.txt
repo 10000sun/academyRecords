@@ -1,0 +1,63 @@
+create database if not exists exam;
+show databases;
+use exam;
+
+desc products;
+select * from products;
+
+select distinct vend_id from products;
+
+select vend_id, avg(prod_price) from products
+group by vend_id;
+
+select prod_id, quantity, item_price, quantity*item_price as 판매가격 from orderitems
+order by quantity*item_price asc limit 1;
+
+select vend_id, sum(prod_price) from products
+group by vend_id;
+
+select prod_id, quantity, item_price from orderitems
+order by quantity asc limit 3;
+
+select * from orderitems;
+
+select distinct o.cust_id, oi.quantity 
+from orders o join orderitems oi
+on o.order_num = oi.order_num
+where oi.order_item >=2;
+
+select * from customers
+where cust_state in('IL','IN','MI');
+
+select * from customers
+where cust_name = 'Fun4All';
+
+select * from customers
+where cust_state in('IL','IN','MI')
+union
+select * from customers
+where cust_name = 'Fun4All';
+
+desc vendors;
+desc products;
+
+select vend_name, prod_name, prod_price
+from vendors v join products p
+on v.vend_id = p.vend_id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

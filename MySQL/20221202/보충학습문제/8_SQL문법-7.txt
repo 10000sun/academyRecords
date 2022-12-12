@@ -1,0 +1,60 @@
+1-1 저장 프로시저 (Strired Procedure)
+--> MySQL 에서 제공하는 프로그래밍
+--> 쿼리문의 집합으로 어떠한 동작을 일괄처리하기 위한 용도로 사용
+--> 사용하려면 호출해서 사용
+
+1-2
+1) 저장 프로시저 생성
+delimiter $$
+create procedure 프로시저명(매개변수)
+begin
+	SQL 프로그래밍;
+end $$
+delimiter ;
+
+2) 저장 프로시저 호출
+call 프로시저명( );
+
+3) 저장 프로시저 제거
+drop procedure 프로시저명;
+
+1-3 백업 (Backup) : 데이터의 보전이나 사고에 대비하여 미리 자료를 복사하는 것
+#mysqldump -u사용자이름 -p비밀번호  데이터베이스이름>파일명
+mysqldump -uroot -p test > test.sql
+
+1-4 복원 (Restore) : 원래 상태로 다시 되돌리는 것
+--> 복원할 데이터베이스는 미리 생성
+#mysql -u사용자이름 -p비밀번호 데이터베이스이름<파일명
+mysql -uroot -p test2 < test.sql
+
+※ 반드시 백업과 복원은 MySQL 프로그램이 아닌 명령프롬프트 (관리자권한)에서 실행할 것
+
+2-1
+use exam;
+
+2-2
+select cust_name,cust_contact,cust_email from customers
+where cust_state in('OH','AZ');
+
+2-3
+delimiter $$
+create procedure mproc(in state1 varchar(10), in state2 varchar(10))
+begin
+	select cust_name,cust_contact,cust_email from customers
+	where cust_state in(state1,state2);
+end $$
+delimiter ;
+
+2-4
+call mproc('IL',Mi');
+
+2-5
+drop procedure mproc;
+
+2-6
+--> 명령프롬프트에서 아래 명령어 실행
+mysqldump -uroot -p exam > exam.sql
+
+2-7
+--> MySQL에서 복원할 exam2 데이터베이스 미리 생성한 후 명령프롬프트에서 아래 명령어 실행
+mysql -uroot -p exam2 < exam.sql

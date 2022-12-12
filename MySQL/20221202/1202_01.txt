@@ -1,0 +1,146 @@
+create database if not exists test;
+
+use test;
+
+create table if not exists member(
+	num int auto_increment,
+	name varchar(10) not null,
+	addr varchar(50),
+	tel varchar(15),
+	primary key(num)
+);
+
+desc member;
+
+select * from member;
+
+insert into member(name, addr, tel) values ('홍길동','부산','010-1111-2222');
+insert into member(name, addr, tel) values ('이순신','서울','010-2222-2222');
+insert into member(name, addr, tel) values ('임꺽정','대전','010-3333-2222');
+
+===========================================================
+
+delimiter $$
+create trigger testTrg
+	after delete -- 삭제 후에 트리거 발생
+	on member -- 부착할 테이블 명
+	for each row -- 각 행마다 적용 (행 트리거)
+begin
+	set @msg = "삭제 트리거 발생";
+end $$
+delimiter ;
+
+insert into member(name, addr, tel) values ('김유신','광주','010-4444-2222');
+
+select @msg;
+
+delete from member where num=2;
+
+select @msg;
+
+===========================================================
+
+delimiter //
+create trigger testTrg2
+	after update on member
+	for each row
+begin
+	set @msg2 = "수정 트리거 발생";
+end //
+delimiter ; -- 띄어쓰기 필수(구분자)
+
+update member
+set addr = '울산'
+where num = 4;
+
+select * from member;
+
+select @msg2;
+
+===========================================================
+
+create table if not exists member2(
+	num int auto_increment,
+	id varchar(20) not null,
+	passwd varchar(20) not null,
+	addr varchar(50),
+	tel char(13),
+	primary key(num)
+);
+
+create table if not exists backup(
+	num int auto_increment,
+	id varchar(20) not null,
+	passwd varchar(20) not null,
+	addr varchar(50),
+	tel char(13),
+	mtype varchar(10),
+	mdate date,
+	muser varchar(20),
+	primary key(num)
+);
+
+insert into member2(id, passwd, addr, tel) values('admin','12345','서울','010-1111-1111');
+insert into member2(id, passwd, addr, tel) values('honggd','12345','부산','010-2222-2222');
+insert into member2(id, passwd, addr, tel) values('leess','12345','대전','010-3333-3333');
+
+select * from member2;
+
+desc backup;
+
+select * from backup;
+
+delimiter ??
+create trigger testTrg3
+	after update on member2
+	for each row
+begin
+	insert into backup(id, passwd, addr, tel, mtype, mdate, muser) values (OLD.id, OLD.passwd, OLD.addr, OLD.tel,'수정',curdate(),current_user());
+end ??
+delimiter ;
+
+select * from member2;
+
+select * from backup;
+
+update member2
+set addr = '울산'
+where num = 2;
+
+delimiter ??
+create trigger testTrg4
+	after delete on member2
+	for each row
+begin
+	insert into backup(id, passwd, addr, tel, mtype, mdate, muser) values (OLD.id, OLD.passwd, OLD.addr, OLD.tel,'삭제',curdate(),current_user());
+end ??
+delimiter ;
+
+delete from member2
+where num = 3;
+
+select * from backup;
+
+insert into member2(id, passwd, addr, tel) values('leews','12345','부산','010-7777-7777');
+
+
+===========================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

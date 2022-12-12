@@ -1,0 +1,67 @@
+create database if not exists exam;
+
+use exam;
+
+desc orderitems;
+
+select * from orderitems;
+
+select * from orderitems
+where order_num = 20008;
+
+select prod_id, quantity, item_price, quantity*item_price as 판매가격 from orderitems;
+
+select prod_name,prod_price
+from products
+where prod_name like '%bean%'
+order by prod_price desc;
+
+select * from products;
+
+select prod_id
+from products
+where prod_price = (select min(prod_price) from products)
+order by prod_price desc;
+
+select sum(prod_price) from products;
+
+select * from orders
+where year(order_date) = '2004';
+
+select sum(prod_price) from products
+where prod_price between 5 and 8;
+
+select prod_name from products
+where prod_price = (select min(prod_price) from products);
+
+select * from orders
+where order_date between '2004-01-01' and '2004-02-29';
+
+select prod_name, prod_price from products
+where prod_price >= (select avg(prod_price) from products);
+
+select count(cust_id) as '고객수' from customers
+where cust_name like 'F%';
+
+select * from vendors
+where vend_state is null;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,42 @@
+create database if not exists nms;
+
+use nms
+
+create table if not exists members(
+	num int auto_increment,
+	name varchar(20) not null,
+	tel varchar(15) not null,
+	addr varchar(50),
+	etc text,
+	primary key(num)
+);
+
+desc members;
+
+alter table members add column email varchar(20);
+
+alter table members drop column etc;
+
+alter table members change column email email varchar(30);
+
+create index name on members(name);
+
+show index from members;
+
+alter table members drop index name;
+
+delimiter //
+create trigger testTrg 
+after insert on members
+for each row
+begin
+	set @msg = '입력 트리거 발생!!!!';
+end //
+delimiter ;
+
+select @msg;
+
+insert into members(name, tel, addr, email) values
+(1,1,1,1);
+
+drop trigger testTrg;

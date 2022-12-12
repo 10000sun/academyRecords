@@ -1,0 +1,157 @@
+create database if not exists academy;
+
+use academy;
+
+create table if not exists branch(
+	b_code varchar(10),
+	b_name varchar(20) not null,
+	b_addr varchar(20) not null,
+	b_tel char(15) not null,
+	primary key(b_code)
+);
+
+create table if not exists toy(
+	t_no varchar(10),
+	t_name varchar(10),
+	t_fee int,
+	t_age int,
+	t_day int,
+	b_code varchar(10),
+	primary key(t_no),
+	foreign key(b_code) references branch(b_code)
+);
+
+create table if not exists emps(
+	e_no varchar(10),
+	e_name varchar(10),
+	e_addr varchar(20),
+	e_phone char(15),
+	b_code varchar(10),
+	primary key(e_no),
+	foreign key(b_code) references branch(b_code)
+);
+
+create table if not exists customer(
+	c_no varchar(10),
+	c_name varchar(10),
+	c_addr varchar(20),
+	c_phone char(15),
+	primary key(c_no)
+);
+
+create table if not exists customer_toy(
+	c_no varchar(10),
+	t_no varchar(10),
+	constraint fk_cust_toy_cust
+	foreign key(c_no) references customer(c_no),
+	constraint fk_cust_toy_toy
+	foreign key(t_no) references toy(t_no)
+);
+
+create table if not exists customer_emps(
+	c_no varchar(10),
+	e_no varchar(10),
+	constraint fk_cust_emps_cust
+	foreign key(c_no) references customer(c_no),
+	constraint fk_cust_emps_emps
+	foreign key(e_no) references emps(e_no)
+);
+
+insert into branch values
+('B0001','부산본점','부산광역시','051-111-9999'),
+('B0002','부산지점','부산광역시','051-222-9999'),
+('B0003','울산지점','울산광역시','052-333-9999'),
+('B0004','대구지점','대구광역시','053-444-9999'),
+('B0005','서울지점','서울특별시','02-555-9999'),
+('B0006','창원지점','경상남도 창원시','055-666-9999'),
+('B0007','아산지점','충청남도 아산시','041-777-9999'),
+('B0008','전남광주지점','전라도 광주시','061-888-9999'),
+('B0009','의왕지점','경기도 의왕시','031-999-9999'),
+('B0010','제주지점','제주특별자치도','051-000-0000');
+
+insert into toy values
+('T0001','곰인형',1000,3,3,'B0006'),
+('T0002','변신로봇',5000,11,5,'B0004'),
+('T0003','캐릭터 꾸미기',8000,9,32,'B0002'),
+('T0004','공룡인형',3000,3,2,'B0005'),
+('T0005','사람인형',10000,10,0,'B0010'),
+('T0006','그림그리는인형',10000,11,3,'B0009'),
+('T0007','돈발사장난감',3000,13,5,'B0001'),
+('T0008','사자탈',5000,12,2,'B0003'),
+('T0009','고무줄총',3000,14,20,'B0007'),
+('T0010','전자칠판',20000,10,35,'B0008');
+
+insert into emps values
+('E0001','홍길동','부산광역시','010-1111-1111','B0001'),
+('E0002','김놀부','울산광역시','010-2222-2222','B0003'),
+('E0003','최흥부','울산광역시','010-3333-3333','B0003'),
+('E0004','차정원','대구광역시','010-4444-4444','B0004'),
+('E0005','김원준','제주특별자치도','010-5555-5555','B0010'),
+('E0006','고관민','서울특별시','010-6666-6666','B0005'),
+('E0007','김민준','충청남도 아산시','010-7777-7777','B0007'),
+('E0008','신혜인','경상남도 창원시','010-8888-8888','B0006'),
+('E0009','정희수','전라도 광주시','010-9999-9999','B0008'),
+('E0010','장민준','경기도 의왕시','010-1111-2222','B0009');
+
+insert into customer values
+('C0001','김일성','부산광역시','010-1111-3333'),
+('C0002','김이성','울산광역시','010-7551-6533'),
+('C0003','김삼성','부산광역시','010-1141-3364'),
+('C0004','김사성','대구광역시','010-1351-3333'),
+('C0005','김오성','전라도 광주시','010-8651-3333'),
+('C0006','김육성','제주특별자치도','010-1151-3333'),
+('C0007','김칠성','서울특별시','010-1111-3433'),
+('C0008','김팔성','충청남도 아산시','010-1145-3333'),
+('C0009','김구성','경상남도 창원시','010-1111-3873'),
+('C0010','김십성','제주특별자치도','010-1656-3353');
+
+insert into customer_toy values
+('C0004','T0006'),
+('C0006','T0002'),
+('C0001','T0009'),
+('C0003','T0005'),
+('C0002','T0001'),
+('C0010','T0004'),
+('C0005','T0003'),
+('C0007','T0010'),
+('C0009','T0008'),
+('C0008','T0007');
+
+insert into customer_emps values
+('C0002','E0005'),
+('C0003','E0007'),
+('C0006','E0003'),
+('C0010','E0008'),
+('C0005','E0001'),
+('C0001','E0010'),
+('C0007','E0002'),
+('C0008','E0004'),
+('C0009','E0009'),
+('C0004','E0006');
+
+01)
+select * from emps;
+
+02)
+select t_no, t_name, t_fee from toy
+where t_age >= 6;
+
+03)
+select c_name as '고객명', t_name as '장난감이름'
+from customer c join customer_toy ct
+on c.c_no = ct.c_no join toy t
+on ct.t_no = t.t_no;
+
+04)
+select c.c_no, c.c_name, t.t_no, t.t_name, t.t_fee, t.t_fee*1.05*t.t_day as '연체료'
+from customer c join customer_toy ct
+on c.c_no = ct.c_no join toy t
+on ct.t_no = t.t_no
+where t.t_day > 0;
+
+05)
+select t.t_no as '장난감번호', t.t_name as '장난감이름', t.t_day as '연체일자'
+from customer c join customer_toy ct
+on c.c_no = ct.c_no join toy t
+on ct.t_no = t.t_no
+where c.c_name = '홍길동';

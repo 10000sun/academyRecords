@@ -1,0 +1,61 @@
+create database if not exists exam;
+use exam;
+
+select * from vendors;
+
+select * from products;
+
+select vend_name, prod_name, prod_price
+from vendors v join products p
+on v.vend_id = p.vend_id;
+
+select vend_name, prod_name, prod_price
+from vendors v join products p
+on v.vend_id = p.vend_id
+where prod_price >= (select avg(prod_price) from products);
+
+select vend_name, prod_name, prod_price
+from vendors v join products p
+on v.vend_id = p.vend_id
+where prod_price >= (select max(prod_price) from products);
+
+create view vendorsproducts1
+as 
+select vend_name, prod_name, prod_price
+from vendors v join products p
+on v.vend_id = p.vend_id
+where prod_price >= (select avg(prod_price) from products);
+
+select * from vendorsproducts1;
+
+create view vendorsproducts2
+as
+select vend_name, prod_name, prod_price
+from vendors v join products p
+on v.vend_id = p.vend_id
+where prod_price >= (select max(prod_price) from products);
+
+select * from vendorsproducts2;
+
+drop view vendorsproducts1;
+
+drop view vendorsproducts2;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

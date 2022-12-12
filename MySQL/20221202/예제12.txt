@@ -1,0 +1,75 @@
+1) vendors테이블과 products테이블을 조인하여 prod_name, vend_name, prod_price 컬럼을 출력하여 보시오. 
+select prod_name, vend_name, prod_price 
+from vendors v join products p
+on v.vend_id = p.vend_id;
+
+2) 1)에서 vend_name에 'Bear'가 들어가는 것만 출력하시오.
+select prod_name, vend_name, prod_price 
+from vendors v join products p
+on v.vend_id = p.vend_id
+where vend_name like '%Bear%';
+
+3) 2)에서 prod_name 컬럼을 내림차순 정렬하여 보시오.
+select prod_name, vend_name, prod_price 
+from vendors v join products p
+on v.vend_id = p.vend_id
+where vend_name like '%Bear%'
+order by prod_name desc;
+
+
+4) 1)의 문장을 프로시저로 작성하여 보시오. 단, 프로시저명은 mproc1로 하시오.
+delimiter $$
+create procedure mproc1()
+begin
+	select prod_name, vend_name, prod_price 
+	from vendors v join products p
+	on v.vend_id = p.vend_id;
+end $$
+delimiter ;
+
+5) 4)에서 생성한 프로시저를 실행하여 보시오.
+call mproc1();
+
+6) customers 테이블에서 cust_state가 'OH','AZ','MI'인 cust_name, cust_contact, cust_email 컬럼을 출력하시오.
+select cust_name, cust_contact, cust_email from customers
+where cust_state in('OH','AZ','MI');
+
+7) 6)의 문장을 프로시저로 작성하여 보시오. 단, 프로시저명은 mproc2로 하고,  입력 매개변수를 state1,state2,state3라고 하시오. 
+
+delimiter $$
+create procedure mproc2(in state1 varchar(20), in state2 varchar(20), in state3 varchar(20))
+begin
+	select cust_name, cust_contact, cust_email from customers
+	where cust_state in(state1,state2,state3);
+
+end $$
+delimiter ;
+
+
+8) 6)에서 생성한 프로시저를 실행하여 보시오. 단, 입력 매개변수 값이 'IL','IN','MI'인 경우 출력하여 보시오.
+call mproc2('IL','IN','MI');
+
+9) 4)에서 생성한 프로시저를 삭제하여 보시오.
+drop procedure mproc1;
+
+10) 7)에서 생성한 프로시저를 삭제하여 보시오.
+drop procedure mproc2;
+
+11) customers테이블에 데이터를 입력한 후 발생하는 트리거를 작성하여 보시오.
+단, 트리거 이름은 testTrg로 한다. 그리고, "입력 트리거 발생!!!"이라는 메시지를 출력하고 확인하여 보시오.
+delimiter $$
+create trigger testTrg
+	after insert on customers
+	for each row
+begin
+	set @msg1 = '입력 트리거 발생!!!';
+end $$
+delimiter ;
+
+select @msg1;
+
+insert into customers values
+(1, 1, 1, 1, 1, 1, 1, 1, 1);
+
+select @msg1;
+

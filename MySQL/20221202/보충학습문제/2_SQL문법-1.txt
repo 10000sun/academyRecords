@@ -1,0 +1,65 @@
+1-1 DML : 데이터조작언어 (검색, 입력, 수정, 삭제) 
+
+1-2 insert문 (데이터 입력 / 삽입)
+insert into 테이블명(컬럼명,...) values (입력값,...);
+여기서 입력값이 정수일때는 정수입력, 문자일때는 ''사용하여 입력
+
+1-3 update문 (데이터 수정 / 갱신)
+update 테이블명
+set 컬럼명=수정값,...
+where 컬럼명 조건절;
+
+1-4 delete문 (데이터 삭제 / 제거)
+delete from 테이블명
+where 컬럼명 조건절;
+
+1-5 where 컬럼명 조건절
+1) 범위지정 : between A and B
+2) 비교연산자 : =, <>, >=, <=, >, < 
+3) 논리연산자 : and, or, not
+4) 패턴매칭 : like '%문자열%' (예) '김%', '%computer%', '%님'
+5) in, not in
+6) 서브쿼리 (Sub Query = 부질의)
+7) is null, is not null
+...
+
+2-1
+create database if not exists nms;
+show databases;
+use nms;
+
+2-2
+create table if not exists members(
+	no int auto_increment,
+	name varchar(20) not null,
+	tel varchar(20),
+	addr varchar(50),
+	license enum('y','n'),
+	primary key(no)
+);
+
+2-3
+insert into members(name,tel,addr,license) values
+('김승용','051-123-4567','부산광역시 남구 대연동','y');
+...
+
+2-4
+select * from members;
+
+2-5
+update members
+set name='홍길동'
+where no=1;
+
+2-6
+delete from members
+where no=3;
+
+2-7
+delete from members
+where addr like '충청남도%'
+
+2-8
+update members
+set license='y'
+where addr like '부산%'
