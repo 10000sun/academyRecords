@@ -1,0 +1,58 @@
+#1) 홈스쿨링의 과목이 외국어인 관리번호, 홈스쿨비를 출력하시오.
+select h_no, h_fee from homeschooling
+where h_subject = '외국어';
+
+#2) 회원 명단에는 있으나 현재 회원가입이 되지 않은 회원이름을 출력하시오.
+select mem_name from membership
+where mem_date is null;
+
+#3) 회원 가입된 회원들의 나이 평균을 출력하여 보시오.
+select avg(mem_age) from membership
+where mem_date is not null;
+
+#4) 서울에 거주하는 회원의 회원이름, 주소, 회원가입일을 출력하여 보시오. 단, 회원이름을 내림차순 정렬하여 보시오.
+select mem_name, mem_addr, mem_date from membership
+where mem_addr like '서울%'
+order by mem_name desc;
+
+#5) M11002 회원의 주소를 부산광역시 동래구 명륜동'으로 수정하고 확인하여 보시오.
+update membership
+set mem_addr = '부산광역시 동래구 명륜동'
+where mem_no = 'M11002';
+select * from membership where mem_no = 'M11002';
+
+/*6) 홈스쿨링 정보 중 과목별로 흥스쿨비의 합계를 출력하여 보시오. 단, 홈스쿨비는 100,000 이상인
+것만 출력하시오.*/
+select h_subject, sum(h_fee) from homeschooling
+where h_fee >= 100000
+group by h_subject;
+
+#7) 방문교사들이 담당하는 당당과목의 종류를 중복값을 제외하고 출력하여 보시오.
+select distinct t_subject from teacher;
+
+#8) 2011년에 가입한 회원수를 출력하여 보시오.
+select count(mem_no) from membership
+where mem_date like '2011%';
+
+#9) 2012년 1월 1일부터 현재까지 가입한 회원이름과 담당방문교사 이름을 출력하여 보시오.
+select mem_name, t_name 
+from membership m join membership_teacher mt
+on m.mem_no = mt.mem_no join teacher t
+on mt.t_no = t.t_no
+where m.mem_date between '2012-01-01' and sysdate();
+
+#10) 9번 문제를 뷰로 생성하고 확인하여 보시오.
+create view memberview
+as
+select mem_name, t_name 
+from membership m join membership_teacher mt
+on m.mem_no = mt.mem_no join teacher t
+on mt.t_no = t.t_no
+where m.mem_date between '2012-01-01' and sysdate();
+
+
+
+
+
+
+

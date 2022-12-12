@@ -1,0 +1,142 @@
+create database if not exists dbexam;
+
+use dbexam;
+
+create table if not exists branch (
+	b_no varchar(6),
+	b_name varchar(20) not null,
+	b_addr varchar(50) not null,
+	b_tel varchar(13) not null,
+	primary key (b_no)
+);
+
+create table if not exists membership (
+	mem_no varchar(6),
+	mem_name varchar(20) not null,
+	mem_age int not null,
+	mem_addr varchar(50) not null,
+	mem_phone varchar(13),
+	mem_date date,
+	primary key (mem_no)
+);
+
+create table if not exists teacher (
+	t_no varchar(6),
+	t_name varchar(20) not null,
+	t_subject varchar(20) not null,
+	t_career int,
+	b_no varchar(6) not null,
+	primary key (t_no),
+	constraint fk_teacher_branch
+	foreign key (b_no) references branch (b_no)
+);
+
+create table if not exists homeschooling (
+	h_no varchar(6),
+	h_fee int not null,
+	h_subject varchar(20) not null,
+	mem_no varchar(6) not null,
+	primary key (h_no),
+	constraint fk_homeschooling_membership
+	foreign key (mem_no) references membership (mem_no)
+);
+
+create table if not exists homeschooling_branch (
+	h_no varchar(6),
+	b_no varchar(6),
+	constraint fk_homeschooling_branch_homeschooling
+	foreign key (h_no) references homeschooling (h_no),
+	constraint fk_homeschooling_branch_branch
+	foreign key (b_no) references branch (b_no)
+);
+
+create table if not exists membership_teacher (
+	mem_no varchar(6),
+	t_no varchar(6),
+	primary key (mem_no, t_no),
+	constraint fk_membership_teacher_membership
+	foreign key (mem_no) references membership (mem_no),
+	constraint fk_membership_teacher_teacher
+	foreign key (t_no) references teacher (t_no)
+);
+
+desc membership;
+desc teacher;
+desc branch;
+desc homeschooling;
+desc homeschooling_branch;
+desc membership_teacher;
+
+insert into membership values
+('M11001','배현직',16,'서울특별시 서초구 서초동','02-111-1111','2011-05-01'),
+('M11002','전민철',15,'부산광역시 수영구 남천동','051-222-2222','2011-06-01'),
+('M11003','허태훈',14,'서울특별시 성북구 돈암동','02-333-3333','2011-07-01'),
+('M11004','유성원',17,'대구광역시 수성구 범어동','053-444-4444','2011-12-01'),
+('M12001','안재연',16,'광주광역시 광산구 송정동','062-555-5555','2012-03-01'),
+('M12002','윤주용',17,'대전광역시 유성구 대정동','042-666-6666','2012-04-01'),
+('M12003','김태환',18,'울산광역시 남구 무거동','052-777-7777','2012-05-01'),
+('M12004','김진수',16,'인천광역시 남동구 간석동','032-888-8888','2012-06-01'),
+('M12005','엄효인',14,'서울특별시 강서구 화곡동','02-999-9999','2012-07-01'),
+('M12006','박청규',15,'부산광역시 북구 덕천동','051-000-000',null);
+
+insert into branch values
+('B11001','서울1','서울특별시 강북구 1111','02-100-1000'),
+('B11002','서울2','서울특별시 강남구 논현동 2222','02-200-2000'),
+('B11003','부산경남1','부산광역시 연제구 연산동 3333','051-300-3000'),
+('B11004','대구경북','대구광역시 중구 동인동 4444','053-400-4000'),
+('B11005','광주전라','광주광역시 서구 치평동 5555','062-500-5000'),
+('B11006','대전충청','대전광역시 서구 둔산동 6666','042-600-6000'),
+('B12001','울산','울산광역시 남구 신정동 7777','052-700-7000'),
+('B12002','인천경기','인천광역시 남동구 구월동 8888','032-800-8000'),
+('B12003','부산경남2','부산광역시 부산진구 부전동 9999','051-900-9000');
+
+insert into teacher values
+('T11001','강원일','언어',3,'B11001'),
+('T11002','이봉수','수리',2,'B11002'),
+('T11003','강대원','외국어',2,'B11003'),
+('T11004','황철원','과학탐구',4,'B11004'),
+('T11005','김성하','사회탐구',1,'B11005'),
+('T11006','심승진','직업탐구',1,'B11006'),
+('T12001','김유신','언어',null,'B11001'),
+('T12002','강감찬','수리',null,'B11002');
+
+insert into homeschooling values
+('H00001',100000,'사회탐구','M11001'),
+('H00002',150000,'외국어','M11002'),
+('H00003',100000,'과학탐구','M11003'),
+('H00004',75000,'언어','M11004'),
+('H00005',50000,'직업탐구','M12001'),
+('H00006',100000,'수리','M12003'),
+('H00007',150000,'언어','M12005'),
+('H00008',100000,'외국어','M12002'),
+('H00009',150000,'수리','M12005'),
+('H00010',50000,'직업탐구','M11002');
+
+insert into membership_teacher values
+('M11001','T11001'),
+('M11002','T11002'),
+('M11003','T11003'),
+('M11004','T11004'),
+('M12001','T11005'),
+('M12002','T12002'),
+('M12003','T11006'),
+('M12004','T11004'),
+('M12005','T12002');
+
+insert into homeschooling_branch values
+('H00001','B11001'),
+('H00002','B11002'),
+('H00003','B11003'),
+('H00004','B11004'),
+('H00005','B11005'),
+('H00006','B11006'),
+('H00007','B12001'),
+('H00008','B12002'),
+('H00009','B12003'),
+('H00010','B11002'),
+('H00004','B11006');
+
+
+
+
+
