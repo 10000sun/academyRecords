@@ -1,0 +1,20 @@
+MVC패턴
+MVC1: model, view, controller
+-jsp: .jsp 페이지 내에 html, javascript, CSS 코드를 작성한다.
+MVC2: model, view, controller
+-java, jsp, html, xml, json 페이지가 따로 관리된다.
+
+톰캣 환경변수
+D:\apache-tomcat-9.0.37
+
+내 PC 우클릭 - 속성 - 고급시스템설정 - 환경변수
+
+시스템 변수 영역에서 새로만들기 - 이름 CATALINA_HOME 경로 D:/톰캣경로
+path 편집 새로만들기 - %CATALINA_HOME%\D:/톰캣경로
+
+패키지구조
+org.bigdata 무료
+3depth : 1단계(목적), 2단계(그룹), 3단계(프로젝트명)
+com.samsung 상용
+gov 정부
+edu.busanuniv 교육, 공부
