@@ -1,0 +1,33 @@
+JDBC(Java Database Connectivity) : 자바언어에서 데이터베이스에 접근할수있는 프로그래밍 API이다.
+순서
+1. 자바어플리케이션과 MySQL데이터베이스가 연동하기위한 드라이버가 필요하다.(mysql.jar)
+   - 드라이버구하기 : oracle사이트, mvnrepository사이트에서 구한다.
+2. 통합개발환경툴(eclipse)에 연동을 위해 드라이버를 등록한다.
+   - WEB-INF/lib폴더에 mysql.jar파일을 붙여넣는다.
+3. 드라이버 로딩(실행)
+   - 코드작성 : Class.forName(com.mysql.cj.jdbc.Driver)
+4. Connection 맺기
+   - java.sql.Connection 객체를 사용한다.
+5. DriverManager.getConnection(url, userid, passwd)
+   - 드라이버매니저를 통해서 연결에 필요한 정보를 전달한다.
+6. SQL문 작성
+   - select => executeQuery()
+   - insert, update, delete => executeUpdate()
+7. Statement or PreparedStatement 생성, CallableStatement생성=> PL/SQL사용시쓴다.
+   - 작성된 쿼리를 전달하기위한 객체
+8. SQL문 작성 코드에 따라 다음객체 생성여부가 정해진다.
+   - select : ResultSet객체를 생성
+   - insert, update, delete : ResultSet객체를 생성을 하지않는다.
+9. 자원반납
+   - 파일 및 데이스베이스는 자바 프로그램에서 사용하는 외부자원이기때문에 반드시 자원을 해제시킨다.
+   - try~catch~finally를 활용해서 close()한다.
+
+
+
+
+
+
+
+
+
+
