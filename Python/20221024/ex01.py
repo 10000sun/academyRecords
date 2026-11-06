@@ -2,8 +2,8 @@ import os
 import sys
 import urllib.request
 import json
-client_id = "9mJ993S7IP7qz4G7Ts96"
-client_secret = "e2w0kySr6b"
+client_id = "YOUR_CLIENT_ID"
+client_secret = "YOUR_CLIENT_SECRET"
 
 query = '치맥'
 encText=urllib.parse.quote_plus(query)
